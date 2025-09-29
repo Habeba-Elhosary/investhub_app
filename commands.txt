@@ -1,0 +1,14 @@
+flutter build apk -t lib/dev_main.dart
+flutter build apk -t lib/prod_main.dart
+flutter build appbundle -t lib/dev_main.dart
+flutter build appbundle -t lib/prod_main.dart
+flutter build ipa -t lib/dev_main.dart
+flutter build ipa -t lib/prod_main.dart
+flutter run --release -t lib/dev_main.dart
+flutter run --release -t lib/prod_main.dart
+//=============================================================================================
+flutter pub run easy_localization:generate --source-dir assets/lang
+flutter pub run easy_localization:generate -S assets/lang -f keys -o LocaleKeys.g.dart
+//=============================================================================================
+rename getBundleId --targets android,ios
+rename setBundleId --targets android,ios --value "com.x.x"
