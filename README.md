@@ -1,3 +1,3 @@
-# investhub_app
+# Investhub App
 
 A new Flutter project.
