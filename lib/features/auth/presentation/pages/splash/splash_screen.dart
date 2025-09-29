@@ -1,9 +1,13 @@
 // ignore_for_file: unnecessary_underscores
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:investhub_app/core/constant/values/app_assets.dart';
 import 'package:investhub_app/core/constant/values/colors.dart';
+import 'package:investhub_app/core/constant/values/text_styles.dart';
+import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/auto_login/auto_login_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/pages/sign_in/sign_in_screen.dart';
+import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,15 +26,11 @@ class SplashScreenState extends State<SplashScreen>
   late AnimationController _expansionController;
   late AnimationController _whiteFadeController;
   late AnimationController _fadeImageController;
-
   late Animation<double> _dropAnim;
   late Animation<double> _scaleAnim;
-  late Animation<double> _whiteFadeAnim;
   late Animation<double> _fadeImageAnim;
-
   final Color splashColor = AppColors.primary;
   final double ballSize = 24.0.sp;
-
   bool _animationFinished = false;
 
   @override
@@ -63,10 +63,6 @@ class SplashScreenState extends State<SplashScreen>
 
     _scaleAnim = Tween<double>(begin: 1.0, end: 50.0).animate(
       CurvedAnimation(parent: _expansionController, curve: Curves.easeIn),
-    );
-
-    _whiteFadeAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _whiteFadeController, curve: Curves.easeIn),
     );
 
     _fadeImageAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -140,7 +136,6 @@ class SplashScreenState extends State<SplashScreen>
         backgroundColor: Colors.white,
         body: Stack(
           children: [
-            // Ball drop & expand
             AnimatedBuilder(
               animation: Listenable.merge([
                 _dropController,
@@ -163,21 +158,42 @@ class SplashScreenState extends State<SplashScreen>
                 );
               },
             ),
-
-            // White background fade-in
-            FadeTransition(
-              opacity: _whiteFadeAnim,
-              child: Container(color: Colors.white),
-            ),
-
-            // Logo fade-in
             Center(
               child: FadeTransition(
                 opacity: _fadeImageAnim,
-                child: Image.asset(
-                  AppAssets.imagesSplashLogo,
-                  fit: BoxFit.scaleDown,
-                  width: 200.sp,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      AppAssets.imagesSplashLogo,
+                      fit: BoxFit.scaleDown,
+                      width: 250.sp,
+                    ),
+                    Text(
+                      LocaleKeys.app_name.tr(),
+                      style: TextStyles.bold24.copyWith(
+                        color: AppColors.white,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 50.sp,
+                      ),
+                    ),
+                    AppSpacer(heightRatio: 1),
+                    Text(
+                      LocaleKeys.splash_title1.tr(),
+                      style: TextStyles.semiBold24.copyWith(
+                        color: AppColors.white,
+                      ),
+                    ),
+                    AppSpacer(heightRatio: 1),
+                    Text(
+                      LocaleKeys.splash_title2.tr(),
+                      style: TextStyles.regular20.copyWith(
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

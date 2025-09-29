@@ -32,12 +32,9 @@ abstract class  LocaleKeys {
   static const durationUnits_month = 'durationUnits.month';
   static const durationUnits_year = 'durationUnits.year';
   static const durationUnits = 'durationUnits';
-  static const onBoarding_skip = 'onBoarding.skip';
-  static const onBoarding_title1 = 'onBoarding.title1';
-  static const onBoarding_subtitle1 = 'onBoarding.subtitle1';
-  static const onBoarding_title2 = 'onBoarding.title2';
-  static const onBoarding_subtitle2 = 'onBoarding.subtitle2';
-  static const onBoarding = 'onBoarding';
+  static const splash_title1 = 'splash.title1';
+  static const splash_title2 = 'splash.title2';
+  static const splash = 'splash';
   static const auth_signin_welcome_message = 'auth.signin_welcome_message';
   static const auth_signin_welcome_sub_message = 'auth.signin_welcome_sub_message';
   static const auth_create_password = 'auth.create_password';
@@ -54,6 +51,7 @@ abstract class  LocaleKeys {
   static const auth_create_account_message = 'auth.create_account_message';
   static const auth_create_account_sub_message = 'auth.create_account_sub_message';
   static const auth_user_name = 'auth.user_name';
+  static const auth_otp_sent_successfully = 'auth.otp_sent_successfully';
   static const auth_create_account = 'auth.create_account';
   static const auth_do_you_have_account = 'auth.do_you_have_account';
   static const auth_go_to_signin = 'auth.go_to_signin';
@@ -61,7 +59,6 @@ abstract class  LocaleKeys {
   static const auth_confirm_identity_message = 'auth.confirm_identity_message';
   static const auth_didnt_receive_code = 'auth.didnt_receive_code';
   static const auth_resend = 'auth.resend';
-  static const auth_otp_sent_successfully = 'auth.otp_sent_successfully';
   static const auth_password_changed_successfully = 'auth.password_changed_successfully';
   static const auth = 'auth';
   static const home_main_page = 'home.main_page';
@@ -102,8 +99,8 @@ abstract class  LocaleKeys {
   static const order_order_details = 'order.order_details';
   static const order_your_order_details = 'order.your_order_details';
   static const order_order_number = 'order.order_number';
-  static const order_no_orders = 'order.no_orders';
   static const order_total = 'order.total';
+  static const order_no_orders = 'order.no_orders';
   static const order_quantity = 'order.quantity';
   static const order_pending = 'order.pending';
   static const order_processing = 'order.processing';
@@ -141,6 +138,7 @@ abstract class  LocaleKeys {
   static const copy = 'copy';
   static const all_notifications_marked_as_read = 'all_notifications_marked_as_read';
   static const show_order_details = 'show_order_details';
+  static const browse_app_as_visitor = 'browse_app_as_visitor';
   static const login_to_become_a_seller = 'login_to_become_a_seller';
   static const login_to_become_a_seller_message = 'login_to_become_a_seller_message';
   static const offers = 'offers';

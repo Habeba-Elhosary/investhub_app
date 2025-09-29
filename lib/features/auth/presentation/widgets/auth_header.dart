@@ -16,7 +16,7 @@ class AuthHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(AppAssets.imagesLogo, height: 110.sp),
+        // Image.asset(AppAssets.imagesLogo, height: 110.sp),
         const AppSpacer(heightRatio: 1.5),
         Text(title, style: TextStyles.bold24),
         const AppSpacer(heightRatio: 0.5),

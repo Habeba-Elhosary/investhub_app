@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../flavors/flavors_config.dart';
 
 class AppColors {
-  static const Color primary = Color(0xff0C448D);
+  static const Color primary = Color(0xFF1591B7);
   static const Color primaryLight = Color(0xffE6F0FA);
   static const Color unActiveBorderColor = Color(0xffDCDCE4);
   static const Color lightGrey = Color(0xff7B8A9D);

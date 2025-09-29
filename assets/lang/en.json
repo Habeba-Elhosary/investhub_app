@@ -1,5 +1,5 @@
 {
-  "app_name": "Ahmed AlKhodary",
+  "app_name": "InvestHub",
   "errorsMessage": {
     "no_internet": "Please check your internet connection.",
     "server_500": "Something went wrong... Please try again.",
@@ -31,12 +31,9 @@
     "month": "Month",
     "year": "Year"
   },
-  "onBoarding": {
-    "skip": "Skip",
-    "title1": "Service and comfort that matter",
-    "subtitle1": "Our team is ready to deliver and replace your battery instantly, whether at your home or on the road. Peace of mind guaranteed.",
-    "title2": "Say goodbye to battery failures",
-    "subtitle2": "Order your car battery anytime. We'll deliver and install it within minutes wherever you are."
+  "splash": {
+    "title1": "Smart Investment App",
+    "title2": "Your gateway to financial success, invest wisely and confidently"
   },
   "auth": {
     "signin_welcome_message": "Welcome!",

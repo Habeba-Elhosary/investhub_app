@@ -46,7 +46,7 @@ class CallCenterBottomSeet extends StatelessWidget {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(AppAssets.imagesCallCenter, height: 150.sp),
+                  // Image.asset(AppAssets.imagesCallCenter, height: 150.sp),
                   const AppSpacer(heightRatio: 1),
                   Text(
                     LocaleKeys.choose_contact_method.tr(),
@@ -85,10 +85,10 @@ class CallCenterBottomSeet extends StatelessWidget {
                             ),
                             child: Column(
                               children: [
-                                SvgPicture.asset(
-                                  AppAssets.imagesWhatsapp,
-                                  height: 30,
-                                ),
+                                // SvgPicture.asset(
+                                //   AppAssets.imagesWhatsapp,
+                                //   height: 30,
+                                // ),
                                 const SizedBox(height: 8),
                                 Text(
                                   LocaleKeys.whatsapp.tr(),
