@@ -11,4 +11,4 @@ flutter pub run easy_localization:generate --source-dir assets/lang
 flutter pub run easy_localization:generate -S assets/lang -f keys -o LocaleKeys.g.dart
 //=============================================================================================
 rename getBundleId --targets android,ios
-rename setBundleId --targets android,ios --value "com.x.x"
+rename setBundleId --targets android,ios --value "com.example.investhub"
