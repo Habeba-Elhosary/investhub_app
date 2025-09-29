@@ -2,36 +2,35 @@ import 'dart:io';
 import 'package:investhub_app/core/entities/status_response.dart';
 import 'package:investhub_app/core/error/exceptions.dart';
 import 'package:investhub_app/core/error/failures.dart';
-import 'package:investhub_app/core/util/fcm_retry.dart';
 import 'package:investhub_app/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:investhub_app/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:investhub_app/features/auth/data/models/auth_response.dart';
 import 'package:investhub_app/features/auth/data/models/detect_user_response.dart';
 import 'package:investhub_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_notifications_handler/firebase_notifications_handler.dart';
+// import 'package:firebase_notifications_handler/firebase_notifications_handler.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRemoteDatasource authRemoteDatasource;
-  final FirebaseMessaging firebaseMessaging;
+  // final FirebaseMessaging firebaseMessaging;
 
   AuthLocalDataSource local;
 
   AuthRepositoryImpl({
     required this.authRemoteDatasource,
     required this.local,
-    required this.firebaseMessaging,
+    // required this.firebaseMessaging,
   });
 
   @override
   Future<Either<Failure, User>> autoLogin() async {
     try {
       final (String phone, String password) = await local.getUserCredentials();
-      await waitForFcmToken();
+      // await waitForFcmToken();
       final AuthResponse authResponse = await authRemoteDatasource.login(
         phone: phone,
         password: password,
-        fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
+        // fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
       );
       await local.cacheUser(authResponse.data.user);
       await local.cacheUserAccessToken(token: authResponse.data.accessToken);
@@ -57,11 +56,11 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     try {
-      await waitForFcmToken();
+      // await waitForFcmToken();
       final AuthResponse data = await authRemoteDatasource.login(
         phone: phone,
         password: password,
-        fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
+        // fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
       );
       await local.cacheUserAccessToken(token: data.data.accessToken);
       await local.cacheUserCredentials(phone: phone, password: password);
@@ -77,9 +76,9 @@ class AuthRepositoryImpl implements AuthRepository {
     required RegisterParams params,
   }) async {
     try {
-      await waitForFcmToken();
+      // await waitForFcmToken();
       final AuthResponse data = await authRemoteDatasource.register(
-        fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
+        // fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
         params: params,
       );
       await local.cacheUserAccessToken(token: data.data.accessToken);

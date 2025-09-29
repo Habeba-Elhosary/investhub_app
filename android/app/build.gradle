@@ -1,0 +1,52 @@
+plugins {
+    id("com.android.application")
+    // id("com.google.gms.google-services")
+    id("kotlin-android")
+    id("dev.flutter.flutter-gradle-plugin")
+}
+
+
+android {
+    namespace = "com.example.investhub_app"
+    compileSdkVersion 36
+    ndkVersion = "28.0.12433566"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        coreLibraryDesugaringEnabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    defaultConfig {
+        applicationId = "com.example.investhub_app"
+        minSdk = 24
+        targetSdk = 36
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
+    
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+
+dependencies {
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
+}

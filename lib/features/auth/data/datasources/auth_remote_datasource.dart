@@ -19,12 +19,12 @@ abstract class AuthRemoteDatasource {
   Future<AuthResponse> login({
     required String phone,
     required String password,
-    required String fcmToken,
+    // required String fcmToken,
   });
 
   Future<AuthResponse> register({
     required RegisterParams params,
-    required String fcmToken,
+    // required String fcmToken,
   });
   Future<AuthResponse> forgetPassword({required String phone});
   Future<Unit> createNewPassword({
@@ -48,7 +48,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   Future<AuthResponse> login({
     required String phone,
     required String password,
-    required String fcmToken,
+    // required String fcmToken,
   }) async {
     try {
       final response = await apiBaseHelper.post(
@@ -56,7 +56,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
         body: <String, dynamic>{
           'phone': phone,
           'password': password,
-          'device_token': fcmToken,
+          // 'device_token': fcmToken,
         },
       );
       return AuthResponse.fromJson(response);
@@ -68,12 +68,15 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   @override
   Future<AuthResponse> register({
     required RegisterParams params,
-    required String fcmToken,
+    // required String fcmToken,
   }) async {
     try {
       final response = await apiBaseHelper.post(
         url: registerAPI,
-        body: {...params.toJson(), 'device_token': fcmToken},
+        body: {
+          ...params.toJson(),
+          // 'device_token': fcmToken
+        },
       );
       return AuthResponse.fromJson(response);
     } catch (e) {

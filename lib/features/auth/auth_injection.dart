@@ -61,7 +61,7 @@ void initAuthInjection() async {
     () => AuthRepositoryImpl(
       local: sl(),
       authRemoteDatasource: sl(),
-      firebaseMessaging: sl(),
+      // firebaseMessaging: sl(),
     ),
   );
   // data sources

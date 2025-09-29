@@ -14,7 +14,7 @@ import 'package:investhub_app/features/notifications/presentation/cubits/mark_al
 import 'package:investhub_app/features/notifications/presentation/cubits/unread_notification_count/unread_count_cubit.dart';
 import 'package:investhub_app/features/orders/order_injection.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -36,7 +36,6 @@ abstract class ServiceLocator {
     _injectAppNavigator();
     _injectCacheService();
     _injectAppTheme();
-    _injectFirbaseMessaging();
     injectSharedPreferences();
     injectSecureStorage();
   }
@@ -86,9 +85,9 @@ void _injectCacheService() {
   sl.registerLazySingleton<CacheService>(() => CacheServiceImpl());
 }
 
-void _injectFirbaseMessaging() async {
-  sl.registerLazySingleton<FirebaseMessaging>(() => FirebaseMessaging.instance);
-}
+// void _injectFirbaseMessaging() async {
+//   sl.registerLazySingleton<FirebaseMessaging>(() => FirebaseMessaging.instance);
+// }
 
 void injectSecureStorage() async {
   AndroidOptions androidOptions = const AndroidOptions(
