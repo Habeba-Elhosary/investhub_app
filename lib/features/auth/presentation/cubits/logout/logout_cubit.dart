@@ -5,8 +5,6 @@ import 'package:investhub_app/core/util/token_storge_helper.dart';
 import 'package:investhub_app/core/widgets/toast.dart';
 import 'package:investhub_app/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/auto_login/auto_login_cubit.dart';
-import 'package:investhub_app/features/home/presentation/cubits/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:investhub_app/features/home/presentation/pages/main_screen.dart';
 import 'package:investhub_app/injection_container.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -29,8 +27,8 @@ class LogoutCubit extends Cubit<LogoutState> {
       },
       (StatusResponse statusResponse) {
         emit(LogoutSuccess());
-        appNavigator.popUtill(screen: const MainScreen());
-        sl<BottomNavigationCubit>().changeIndex(0);
+        // appNavigator.popUtill(screen: const MainScreen());
+        // sl<BottomNavigationCubit>().changeIndex(0);
         sl<AutoLoginCubit>().logout();
         TokenStorageHelper.clearData();
         showSucessToast(statusResponse.message);

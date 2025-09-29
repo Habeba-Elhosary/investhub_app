@@ -4,7 +4,6 @@ import 'package:investhub_app/features/auth/data/models/auth_response.dart';
 import 'package:investhub_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:investhub_app/features/auth/domain/usecases/register_usecase.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/auto_login/auto_login_cubit.dart';
-import 'package:investhub_app/features/home/presentation/pages/main_screen.dart';
 import 'package:investhub_app/injection_container.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -30,7 +29,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(RegisterSuccess());
         sl<AutoLoginCubit>().setUser = authResponse.data.user;
         sl<AutoLoginCubit>().emitHasUserAsState();
-        appNavigator.popUtill(screen: const MainScreen());
+        // appNavigator.popUtill(screen: const MainScreen());
       },
     );
   }

@@ -4,15 +4,7 @@ import 'package:investhub_app/core/util/api_base_helper.dart';
 import 'package:investhub_app/core/util/navigator.dart';
 import 'package:investhub_app/features/auth/auth_injection.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/auto_login/auto_login_cubit.dart';
-import 'package:investhub_app/features/cart/cart_injection.dart';
-import 'package:investhub_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:investhub_app/features/general/general_injection.dart';
-import 'package:investhub_app/features/home/home_injection.dart';
-import 'package:investhub_app/features/notifications/notifications_injection.dart';
-import 'package:investhub_app/features/notifications/presentation/cubits/all_notification/all_notification_cubit.dart';
-import 'package:investhub_app/features/notifications/presentation/cubits/mark_all_notification_read/mark_all_as_read_cubit.dart';
-import 'package:investhub_app/features/notifications/presentation/cubits/unread_notification_count/unread_count_cubit.dart';
-import 'package:investhub_app/features/orders/order_injection.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -25,11 +17,7 @@ abstract class ServiceLocator {
   static Future<void> init() async {
     // features
     initAuthInjection();
-    initHomeInjection();
-    initCartInjection();
-    initOrderInjection();
     initGeneralInjection();
-    initNotificationsInjection();
     // core
     injectDioHelper();
     _injectAppNavigator();
@@ -44,14 +32,6 @@ abstract class ServiceLocator {
     BlocProvider<ThemeCubit>(create: (_) => sl<ThemeCubit>()),
     BlocProvider<AutoLoginCubit>(
       create: (_) => sl<AutoLoginCubit>()..fAutoLogin(),
-    ),
-    BlocProvider<MarkAllAsReadCubit>(create: (_) => sl<MarkAllAsReadCubit>()),
-    BlocProvider<AllNotificationsCubit>(
-      create: (_) => sl<AllNotificationsCubit>(),
-    ),
-    BlocProvider<CartCubit>(create: (_) => sl<CartCubit>()),
-    BlocProvider<UnreadCountCubit>(
-      create: (_) => sl<UnreadCountCubit>()..getUnreadCount(),
     ),
   ];
 }
