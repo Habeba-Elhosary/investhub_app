@@ -14,7 +14,6 @@ import 'package:investhub_app/features/notifications/presentation/cubits/mark_al
 import 'package:investhub_app/features/notifications/presentation/cubits/unread_notification_count/unread_count_cubit.dart';
 import 'package:investhub_app/features/orders/order_injection.dart';
 import 'package:dio/dio.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -36,8 +35,8 @@ abstract class ServiceLocator {
     _injectAppNavigator();
     _injectCacheService();
     _injectAppTheme();
-    injectSharedPreferences();
-    injectSecureStorage();
+    await injectSharedPreferences();
+    await injectSecureStorage();
   }
 
   static List<BlocProvider<StateStreamableSource<Object?>>>
@@ -46,7 +45,6 @@ abstract class ServiceLocator {
     BlocProvider<AutoLoginCubit>(
       create: (_) => sl<AutoLoginCubit>()..fAutoLogin(),
     ),
-    // notifications
     BlocProvider<MarkAllAsReadCubit>(create: (_) => sl<MarkAllAsReadCubit>()),
     BlocProvider<AllNotificationsCubit>(
       create: (_) => sl<AllNotificationsCubit>(),
@@ -85,11 +83,7 @@ void _injectCacheService() {
   sl.registerLazySingleton<CacheService>(() => CacheServiceImpl());
 }
 
-// void _injectFirbaseMessaging() async {
-//   sl.registerLazySingleton<FirebaseMessaging>(() => FirebaseMessaging.instance);
-// }
-
-void injectSecureStorage() async {
+Future<void> injectSecureStorage() async {
   AndroidOptions androidOptions = const AndroidOptions(
     encryptedSharedPreferences: true,
   );
@@ -99,7 +93,7 @@ void injectSecureStorage() async {
   sl.registerLazySingleton<FlutterSecureStorage>(() => storage);
 }
 
-void injectSharedPreferences() async {
+Future<void> injectSharedPreferences() async {
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
   sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);

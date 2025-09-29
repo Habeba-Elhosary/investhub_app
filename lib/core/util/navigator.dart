@@ -54,7 +54,9 @@ class AppNavigator {
   dynamic popToRawy({dynamic object}) {
     return navigatorKey.currentState!.pushAndRemoveUntil(
       // ignore: always_specify_types
-      MaterialPageRoute(builder: (BuildContext context) => const App()),
+      MaterialPageRoute(
+        builder: (BuildContext context) => const InvestHubApp(),
+      ),
       (Route<dynamic> route) => false,
     );
   }
