@@ -52,6 +52,10 @@ class CodegenLoader extends AssetLoader{
     "title2": "Your gateway to financial success, invest wisely and confidently"
   },
   "auth": {
+    "or": "OR",
+    "dont_have_account": "Don't have an account ?",
+    "signup": "Sign Up",
+    "signin_with_google": "Sign in with Google",
     "signin_welcome_message": "Welcome!",
     "signin_welcome_sub_message": "We hope your experience with us is enjoyable and useful.",
     "create_password": "Create Password",
@@ -73,7 +77,7 @@ class CodegenLoader extends AssetLoader{
     "do_you_have_account": "Already have an account?",
     "go_to_signin": "Go to Sign In",
     "confirm_identity": "Confirm Identity",
-    "confirm_identity_message": "To verify your identity, enter the 6-digit verification code.",
+    "confirm_identity_message": "To verify your identity, enter the 4-digit verification code.",
     "didnt_receive_code": "Didn't receive the code?",
     "resend": "Resend",
     "password_changed_successfully": "Password changed successfully"
@@ -213,6 +217,10 @@ static const Map<String,dynamic> _ar = {
     "title2": "بوابتك للنجاح المالي، استثمر بذكاء وثقة"
   },
   "auth": {
+    "dont_have_account": "لا يوجد لديك حساب ؟",
+    "signup": "انشاء حساب",
+    "signin_with_google": "تسجيل دخول بواسطة جوجل",
+    "or": "أو",
     "signin_welcome_message": "مرحباً بك!",
     "signin_welcome_sub_message": "نأمل أن تجد تجربتك معنا ممتعة ومفيدة.",
     "create_password": "إنشاء كلمة مرور‍",
@@ -233,7 +241,7 @@ static const Map<String,dynamic> _ar = {
     "do_you_have_account": "هل لديك حساب؟",
     "go_to_signin": "قم بتسجيل الدخول",
     "confirm_identity": "تأكيد الهوية",
-    "confirm_identity_message": "للتأكد من هويتك أدخل رمز التحقق المكون من 6 ارقام",
+    "confirm_identity_message": "للتأكد من هويتك أدخل رمز التحقق المكون من 4 ارقام",
     "didnt_receive_code": "لم تستلم الكود؟",
     "resend": "اعادة ارسال",
     "otp_sent_successfully": "تم ارسال الرمز بنجاح",

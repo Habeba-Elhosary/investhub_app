@@ -1,4 +1,7 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:investhub_app/core/constant/values/app_assets.dart';
 import 'package:investhub_app/core/constant/values/colors.dart';
+import 'package:investhub_app/core/constant/values/fonts.dart';
 import 'package:investhub_app/core/constant/values/size_config.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/util/validator.dart';
@@ -9,13 +12,11 @@ import 'package:investhub_app/features/auth/presentation/cubits/detect_user_by_p
 import 'package:investhub_app/features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/pages/create_new_password/create_new_password_screen.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/auth_header.dart';
-import 'package:investhub_app/features/auth/presentation/widgets/call_center_bottomsheet.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -97,36 +98,36 @@ class _SignInScreenState extends State<SignInScreen> {
                               FocusScope.of(context).unfocus();
                             },
                           ),
-                          const AppSpacer(heightRatio: 1.5),
+                          const AppSpacer(heightRatio: 1),
 
-                          if (detectUserState
-                              is DetectUserByPhoneHasActiveUser) ...[
-                            PasswordTextFormField(
-                              lable: LocaleKeys.auth_password.tr(),
-                              controller: passwordController,
-                              validator: (String? value) =>
-                                  Validator.password(value),
-                            ).animate().slideY(
-                              duration: const Duration(milliseconds: 300),
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                ),
-                                onPressed: () {
-                                  appNavigator.push(
-                                    screen: const CreateNewPasswordScreen(),
-                                  );
-                                },
-                                child: Text(
-                                  LocaleKeys.auth_forgot_password.tr(),
-                                  style: TextStyles.bold14,
+                          // if (detectUserState
+                          //     is DetectUserByPhoneHasActiveUser) ...[
+                          PasswordTextFormField(
+                            lable: LocaleKeys.auth_password.tr(),
+                            controller: passwordController,
+                            validator: (String? value) =>
+                                Validator.password(value),
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                              ),
+                              onPressed: () {
+                                appNavigator.push(
+                                  screen: const CreateNewPasswordScreen(),
+                                );
+                              },
+                              child: Text(
+                                LocaleKeys.auth_forgot_password.tr(),
+                                style: TextStyles.bold14.copyWith(
+                                  color: AppColors.primary,
                                 ),
                               ),
                             ),
-                          ],
+                          ),
+                          // ],
                           BlocProvider<LoginCubit>(
                             create: (context) => sl<LoginCubit>(),
                             child: Builder(
@@ -175,36 +176,41 @@ class _SignInScreenState extends State<SignInScreen> {
                               },
                             ),
                           ),
+                          const AppSpacer(heightRatio: 1),
+                          Row(
+                            children: [
+                              Expanded(child: Divider(thickness: 1)),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 15.sp,
+                                ),
+                                child: Text(
+                                  LocaleKeys.auth_or.tr(),
+                                  style: TextStyles.bold14,
+                                ),
+                              ),
+                              Expanded(child: Divider(thickness: 1)),
+                            ],
+                          ),
+                          const AppSpacer(heightRatio: 1),
+                          OutlinedButton(
+                            onPressed: () {},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  AppAssets.imagesGoogle,
+                                  width: 25.sp,
+                                  height: 25.sp,
+                                ),
+                                AppSpacer(widthRatio: 1),
+                                Text(LocaleKeys.auth_signin_with_google.tr()),
+                              ],
+                            ),
+                          ),
                           const AppSpacer(heightRatio: 1.5),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: [
-                          //     Text(
-                          //       '${LocaleKeys.auth_no_account.tr()} ',
-                          //       style: TextStyles.bold14,
-                          //     ),
-                          //     TextButton(
-                          //       style: TextButton.styleFrom(
-                          //         padding: EdgeInsets.zero,
-                          //       ),
-                          //       onPressed: () {
-                          //         appNavigator.push(
-                          //           screen: const SignUpScreen(),
-                          //         );
-                          //       },
-                          //       child: Text(
-                          //         LocaleKeys.auth_create_account.tr(),
-                          //         style: TextStyles.bold14,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
                           GestureDetector(
-                            onTap: () {
-                              appNavigator.showSheet(
-                                child: CallCenterBottomSeet(),
-                              );
-                            },
+                            onTap: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -212,15 +218,18 @@ class _SignInScreenState extends State<SignInScreen> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'ليس لديك حساب؟ ',
-                                        style: TextStyles.bold16.copyWith(
+                                        text:
+                                            '${LocaleKeys.auth_dont_have_account.tr()} ',
+                                        style: TextStyles.semiBold16.copyWith(
                                           color: AppColors.black,
+                                          fontFamily: AppFonts.tajawal,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: 'تواصل مع خدمة العملاء',
-                                        style: TextStyles.bold16.copyWith(
+                                        text: LocaleKeys.auth_signup.tr(),
+                                        style: TextStyles.semiBold16.copyWith(
                                           color: AppColors.primary,
+                                          fontFamily: AppFonts.tajawal,
                                         ),
                                       ),
                                     ],

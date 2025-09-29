@@ -112,18 +112,22 @@ class SplashScreenState extends State<SplashScreen>
   }
 
   void _navigateIfReady() {
-    final cubit = context.read<AutoLoginCubit>();
-    final state = cubit.state;
+    // TODO: RETURN
+
+    // final cubit = context.read<AutoLoginCubit>();
+    // final state = cubit.state;
 
     if (!_animationFinished) return;
 
-    if (state is AutoLoginSeenIntro) {
-      appNavigator.pushReplacement(screen: const SignInScreen());
-    } else if (state is AutoLoginNoUser) {
-      // appNavigator.pushReplacement(screen: const MainScreen());
-    } else if (state is AutoLoginHasUser) {
-      // appNavigator.pushReplacement(screen: const MainScreen());
-    }
+    appNavigator.pushReplacement(screen: const SignInScreen());
+
+    // if (state is AutoLoginSeenIntro) {
+    //   appNavigator.pushReplacement(screen: const SignInScreen());
+    // } else if (state is AutoLoginNoUser) {
+    //   appNavigator.pushReplacement(screen: const MainScreen());
+    // } else if (state is AutoLoginHasUser) {
+    // appNavigator.pushReplacement(screen: const MainScreen());
+    // }
   }
 
   @override

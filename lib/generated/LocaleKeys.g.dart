@@ -35,6 +35,10 @@ abstract class  LocaleKeys {
   static const splash_title1 = 'splash.title1';
   static const splash_title2 = 'splash.title2';
   static const splash = 'splash';
+  static const auth_or = 'auth.or';
+  static const auth_dont_have_account = 'auth.dont_have_account';
+  static const auth_signup = 'auth.signup';
+  static const auth_signin_with_google = 'auth.signin_with_google';
   static const auth_signin_welcome_message = 'auth.signin_welcome_message';
   static const auth_signin_welcome_sub_message = 'auth.signin_welcome_sub_message';
   static const auth_create_password = 'auth.create_password';

@@ -27,21 +27,22 @@ class AppLightTheme {
       foregroundColor: AppColors.white,
       textStyle: TextStyles.bold16.copyWith(fontFamily: AppFonts.tajawal),
       elevation: 0.0,
-      shape: const StadiumBorder(),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.hPadding,
-        vertical: 22.sp,
+        vertical: 18.sp,
       ),
     ),
   );
 
   static OutlinedButtonThemeData outlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
+      textStyle: TextStyles.bold16.copyWith(fontFamily: AppFonts.tajawal),
       foregroundColor: AppColors.primary,
-      shape: const StadiumBorder(),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.hPadding,
-        vertical: 18.sp,
+        vertical: 15.sp,
       ),
       side: BorderSide(color: AppColors.primary),
     ),
@@ -85,6 +86,7 @@ class AppLightTheme {
     scaffoldBackgroundColor: AppColors.white,
     inputDecorationTheme: InputDecorationTheme(
       border: InputBorder.none,
+
       suffixIconColor: AppColors.primary,
       hintStyle: TextStyles.regular16.copyWith(color: AppColors.lightGrey),
       errorBorder: OutlineInputBorder(

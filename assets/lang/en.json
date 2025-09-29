@@ -36,6 +36,10 @@
     "title2": "Your gateway to financial success, invest wisely and confidently"
   },
   "auth": {
+    "or" : "OR",
+    "dont_have_account": "Don't have an account ?",
+    "signup": "Sign Up", 
+    "signin_with_google": "Sign in with Google",
     "signin_welcome_message": "Welcome!",
     "signin_welcome_sub_message": "We hope your experience with us is enjoyable and useful.",
     "create_password": "Create Password",
@@ -57,7 +61,7 @@
     "do_you_have_account": "Already have an account?",
     "go_to_signin": "Go to Sign In",
     "confirm_identity": "Confirm Identity",
-    "confirm_identity_message": "To verify your identity, enter the 6-digit verification code.",
+    "confirm_identity_message": "To verify your identity, enter the 4-digit verification code.",
     "didnt_receive_code": "Didn't receive the code?",
     "resend": "Resend",
     "password_changed_successfully": "Password changed successfully"
