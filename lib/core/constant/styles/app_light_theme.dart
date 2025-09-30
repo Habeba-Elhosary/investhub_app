@@ -49,15 +49,24 @@ class AppLightTheme {
   );
 
   static DropdownMenuThemeData dropdownMenuThemeData = DropdownMenuThemeData(
+    textStyle: TextStyles.regular12,
     inputDecorationTheme: InputDecorationTheme(
-      suffixIconColor: AppColors.primary,
+      isDense: true,
+      hintStyle: TextStyles.regular12.copyWith(color: AppColors.lightGrey),
+      filled: true,
+      fillColor: AppColors.textFormFieldBG,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
       border: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.greyDark),
-        borderRadius: BorderRadius.circular(SizeConfig.radius * 0.5),
+        borderRadius: BorderRadius.circular(8.r),
+        borderSide: const BorderSide(color: AppColors.unActiveBorderColor),
       ),
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: SizeConfig.hPadding,
-        vertical: SizeConfig.vPadding,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        borderSide: const BorderSide(color: AppColors.unActiveBorderColor),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        borderSide: BorderSide(color: AppColors.primary),
       ),
     ),
   );

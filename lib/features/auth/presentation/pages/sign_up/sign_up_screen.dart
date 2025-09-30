@@ -59,10 +59,7 @@ class SignUpScreen extends StatelessWidget {
                             child: OutlinedButton(
                               onPressed: () {},
                               // onPressed: registerCubit.goToPreviousStep,
-                              child: Text(
-                                LocaleKeys.the_previous.tr(),
-                                style: TextStyles.medium16,
-                              ),
+                              child: Text(LocaleKeys.the_previous.tr()),
                             ),
                           ),
 

@@ -48,6 +48,17 @@ abstract class  LocaleKeys {
   static const auth_birth_date = 'auth.birth_date';
   static const auth_select_birth_date = 'auth.select_birth_date';
   static const auth_or = 'auth.or';
+  static const auth_marital_status = 'auth.marital_status';
+  static const auth_select_marital_status = 'auth.select_marital_status';
+  static const auth_family_number = 'auth.family_number';
+  static const auth_education_level = 'auth.education_level';
+  static const auth_select_education_level = 'auth.select_education_level';
+  static const auth_yearly_income = 'auth.yearly_income';
+  static const auth_enter_yearly_income = 'auth.enter_yearly_income';
+  static const auth_total_savings = 'auth.total_savings';
+  static const auth_enter_total_savings = 'auth.enter_total_savings';
+  static const auth_used_bank = 'auth.used_bank';
+  static const auth_select_bank = 'auth.select_bank';
   static const auth_create_account_hint = 'auth.create_account_hint';
   static const auth_dont_have_account = 'auth.dont_have_account';
   static const auth_signup = 'auth.signup';

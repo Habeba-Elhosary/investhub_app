@@ -6,6 +6,8 @@ class AppAssets {
 
   static const String imagesGoogle = "assets/images/google.png";
 
+  static const String imagesSaudiRiyalSymbol = "assets/images/Saudi_Riyal_Symbol.png";
+
   static const String imagesSplashLogo = "assets/images/splash_logo.png";
 }
 
