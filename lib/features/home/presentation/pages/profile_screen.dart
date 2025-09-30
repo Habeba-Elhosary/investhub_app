@@ -12,6 +12,7 @@ import 'package:investhub_app/features/auth/presentation/pages/change_psassword/
 import 'package:investhub_app/features/auth/presentation/pages/sign_up/sign_up_screen.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/logout_bottom_sheet.dart';
 import 'package:investhub_app/features/home/presentation/pages/static_data_screen.dart';
+import 'package:investhub_app/features/home/presentation/widgets/language_bottom_sheet.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 
@@ -99,7 +100,9 @@ class ProfileScreen extends StatelessWidget {
                     ProfileCardItem(
                       title: LocaleKeys.profile_change_language.tr(),
                       image: AppAssets.imagesLanguage,
-                      onTap: () {},
+                      onTap: () {
+                        LanguageBottomSheet.show(context);
+                      },
                     ),
                     Divider(),
                     ProfileCardItem(

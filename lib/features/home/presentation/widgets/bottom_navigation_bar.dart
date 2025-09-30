@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
-import 'package:investhub_app/core/util/token_storge_helper.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/features/home/domain/entities/bottom_navigation_entity.dart';
 import 'package:investhub_app/features/home/presentation/cubit/bottom_navigation/bottom_navigation_cubit.dart';
@@ -41,13 +41,6 @@ class BottomNavBar extends StatelessWidget {
             currentIndex: currentIndex,
             onTap: (index) async {
               context.read<BottomNavigationCubit>().changeIndex(index);
-              final bool hasToken = await TokenStorageHelper.hasValidToken();
-              if (hasToken) {
-                Future.microtask(() {
-                  // ignore: use_build_context_synchronously
-                  // context.read<UnreadCountCubit>().getUnreadCount();
-                });
-              }
             },
             selectedItemColor: AppColors.primary,
             unselectedItemColor: AppColors.greyDark,

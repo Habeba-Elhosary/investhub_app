@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await ServiceLocator.init();
   SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
@@ -26,8 +27,7 @@ void main() async {
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
       path: 'assets/lang',
-      fallbackLocale: const Locale('ar'),
-      startLocale: const Locale('ar'),
+      fallbackLocale: const Locale('en'),
       assetLoader: const CodegenLoader(),
       child: InvestHubApp(),
     ),
