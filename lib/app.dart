@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:investhub_app/core/constant/styles/theme/theme_cubit.dart';
 import 'package:investhub_app/core/constant/values/size_config.dart';
 import 'package:investhub_app/core/util/font_scale_handler.dart';
@@ -9,9 +11,32 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:no_screenshot/no_screenshot.dart';
 
-class InvestHubApp extends StatelessWidget {
+class InvestHubApp extends StatefulWidget {
   const InvestHubApp({super.key});
+
+  @override
+  State<InvestHubApp> createState() => _InvestHubAppState();
+}
+
+class _InvestHubAppState extends State<InvestHubApp> {
+  @override
+  void initState() {
+    super.initState();
+    _initializeScreenshotProtection();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeScreenshotProtection();
+    });
+  }
+
+  Future<void> _initializeScreenshotProtection() async {
+    try {
+      await NoScreenshot.instance.screenshotOff();
+    } catch (e) {
+      log('NoScreenshot error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
