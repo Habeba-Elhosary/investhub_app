@@ -42,7 +42,7 @@ class AppLightTheme {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.hPadding,
-        vertical: 15.sp,
+        vertical: 18.sp,
       ),
       side: BorderSide(color: AppColors.primary),
     ),

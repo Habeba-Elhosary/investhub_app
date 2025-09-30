@@ -10,6 +10,7 @@ import 'package:investhub_app/features/auth/presentation/cubits/register/registe
 import 'package:investhub_app/features/auth/presentation/pages/sign_in/sign_in_screen.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/auth_header.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_one.dart';
+import 'package:investhub_app/features/auth/presentation/widgets/register_form_three.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_two.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
@@ -19,7 +20,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int x = 1;
+    int x = 0;
     return BlocProvider<RegisterCubit>(
       create: (context) => sl<RegisterCubit>(),
       child: Scaffold(
@@ -51,7 +52,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     AppSpacer(heightRatio: 0.5),
                     buildRegisterForm(registerCubit),
-                    AppSpacer(heightRatio: 1.5),
+                    AppSpacer(heightRatio: 1),
                     Row(
                       children: [
                         if (x > 0)
@@ -63,7 +64,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                           ),
 
-                        if (x > 0) AppSpacer(widthRatio: 1),
+                        if (x > 0) AppSpacer(widthRatio: 0.5),
                         Expanded(
                           child: BlocBuilder<RegisterCubit, RegisterState>(
                             // buildWhen: (previous, current) =>
@@ -139,13 +140,13 @@ class SignUpScreen extends StatelessWidget {
 }
 
 Widget buildRegisterForm(RegisterCubit registerCubit) {
-  switch (1) {
+  switch (0) {
     case 0:
       return RegisterFormOne(registerCubit: registerCubit);
     case 1:
       return RegisterFormTwo(registerCubit: registerCubit);
     case 2:
-    // return const RegisterFormThree();
+      return RegisterFormThree(registerCubit: registerCubit);
     default:
       return RegisterFormOne(registerCubit: registerCubit);
   }
