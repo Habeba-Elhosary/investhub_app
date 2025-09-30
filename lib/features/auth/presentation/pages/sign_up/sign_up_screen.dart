@@ -14,6 +14,7 @@ import 'package:investhub_app/features/auth/presentation/widgets/auth_header.dar
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_one.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_three.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_two.dart';
+import 'package:investhub_app/features/home/presentation/pages/main_screen.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 
@@ -23,7 +24,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int x = 0;
+    int x = 2;
     return BlocProvider<RegisterCubit>(
       create: (context) => sl<RegisterCubit>(),
       child: Scaffold(
@@ -85,7 +86,10 @@ class SignUpScreen extends StatelessWidget {
                                 // replacement: const SpinnerLoading(),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    if (x == 0) {
+                                    if (x == 2) {
+                                      appNavigator.pushReplacement(
+                                        screen: const MainScreen(),
+                                      );
                                       // if (registerCubit
                                       //         .formKeyStep1
                                       //         .currentState
@@ -150,7 +154,7 @@ class SignUpScreen extends StatelessWidget {
 }
 
 Widget buildRegisterForm(RegisterCubit registerCubit) {
-  switch (0) {
+  switch (2) {
     case 0:
       return RegisterFormOne(registerCubit: registerCubit);
     case 1:

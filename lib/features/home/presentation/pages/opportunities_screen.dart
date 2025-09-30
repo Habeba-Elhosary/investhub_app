@@ -85,76 +85,28 @@ class OpportunityCard extends StatelessWidget {
           AppSpacer(heightRatio: 0.7),
           Row(
             children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.sp,
-                    vertical: 15.sp,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.grey,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('السعر الحالي', style: TextStyles.regular16),
-                      AppSpacer(heightRatio: 0.7),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            '2300.0',
-                            style: TextStyles.bold22.copyWith(fontSize: 30.sp),
-                          ),
-                          AppSpacer(widthRatio: 0.5),
-                          Image.asset(
-                            AppAssets.imagesSaudiRiyalSymbol,
-                            height: 18.sp,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+              Text('السعر الحالي : ', style: TextStyles.regular16),
+              AppSpacer(heightRatio: 0.5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('2300.0', style: TextStyles.bold20),
+                  AppSpacer(widthRatio: 0.5),
+                  Image.asset(AppAssets.imagesSaudiRiyalSymbol, height: 18.sp),
+                ],
               ),
-              AppSpacer(widthRatio: 0.5),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.sp,
-                    vertical: 15.sp,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.grey,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('سعر الدخول', style: TextStyles.regular16),
-                      AppSpacer(heightRatio: 0.7),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            '2300.0',
-                            style: TextStyles.bold22.copyWith(fontSize: 30.sp),
-                          ),
-                          AppSpacer(widthRatio: 0.5),
-                          Image.asset(
-                            AppAssets.imagesSaudiRiyalSymbol,
-                            height: 18.sp,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+              Spacer(),
+              Text('سعر الدخول : ', style: TextStyles.regular16),
+              AppSpacer(heightRatio: 0.5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('2300.0', style: TextStyles.bold20),
+                  AppSpacer(widthRatio: 0.5),
+                  Image.asset(AppAssets.imagesSaudiRiyalSymbol, height: 18.sp),
+                ],
               ),
             ],
           ),
@@ -172,7 +124,7 @@ class OpportunityCard extends StatelessWidget {
                 ),
               ),
               AppSpacer(widthRatio: 0.3),
-              Text('العائد المتوقع : '),
+              Text('العائد المتوقع : ', style: TextStyles.regular16),
               Spacer(),
               Text(
                 '+50 %',
