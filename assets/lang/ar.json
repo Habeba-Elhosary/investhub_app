@@ -118,5 +118,9 @@
   "the_next": "التالى",
   "subscribe_now": "اشترك الان",
   "opportunity_details": "تفاصيل الفرصة",
-  "opportunity_description": "وصف الفرصة"
+  "opportunity_description": "وصف الفرصة",
+  "edit_profile_desc" : "قم بتعديل ملفك الشخصي الآن و اضغط حفظ لتحديث الملف الشخصي الخاص بك",
+  "current_password" : "كلمة المرور الحالية",
+  "new_password" : "كلمة المرور الجديدة",
+  "confirm_new_password" : "تأكيد كلمة المرور الجديدة"
 }

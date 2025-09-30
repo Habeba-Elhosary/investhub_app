@@ -8,7 +8,11 @@ import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/size_config.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
+import 'package:investhub_app/features/auth/presentation/pages/change_psassword/change_password_screen.dart';
+import 'package:investhub_app/features/auth/presentation/pages/sign_up/sign_up_screen.dart';
+import 'package:investhub_app/features/home/presentation/pages/static_data_screen.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
+import 'package:investhub_app/injection_container.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -57,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               AppSpacer(heightRatio: 1),
               Container(
-                padding: EdgeInsets.all(20.sp),
+                padding: EdgeInsets.all(25.sp),
                 decoration: BoxDecoration(
                   color: AppColors.white,
                   boxShadow: [
@@ -71,18 +75,24 @@ class ProfileScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Column(
-                  spacing: 10.sp,
+                  spacing: 15.sp,
                   children: [
                     ProfileCardItem(
                       title: LocaleKeys.profile_edit_profile.tr(),
                       image: AppAssets.imagesWrite,
-                      onTap: () {},
+                      onTap: () {
+                        appNavigator.push(
+                          screen: SignUpScreen(isSignUp: false),
+                        );
+                      },
                     ),
                     Divider(),
                     ProfileCardItem(
                       title: LocaleKeys.profile_change_password.tr(),
                       image: AppAssets.imagesResetPassword,
-                      onTap: () {},
+                      onTap: () {
+                        appNavigator.push(screen: ChangePasswordScreen());
+                      },
                     ),
                     Divider(),
                     ProfileCardItem(
@@ -100,13 +110,25 @@ class ProfileScreen extends StatelessWidget {
                     ProfileCardItem(
                       title: LocaleKeys.profile_about_app.tr(),
                       image: AppAssets.imagesInsurance,
-                      onTap: () {},
+                      onTap: () {
+                        appNavigator.push(
+                          screen: StaticDataScreen(
+                            title: LocaleKeys.profile_about_app.tr(),
+                          ),
+                        );
+                      },
                     ),
                     Divider(),
                     ProfileCardItem(
                       title: LocaleKeys.profile_privacy_policy.tr(),
                       image: AppAssets.imagesInsurance,
-                      onTap: () {},
+                      onTap: () {
+                        appNavigator.push(
+                          screen: StaticDataScreen(
+                            title: LocaleKeys.profile_privacy_policy.tr(),
+                          ),
+                        );
+                      },
                     ),
                     Divider(),
                     ProfileCardItem(

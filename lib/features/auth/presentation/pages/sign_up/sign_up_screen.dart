@@ -1,7 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
@@ -16,7 +18,8 @@ import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+  final bool isSignUp;
+  const SignUpScreen({super.key, required this.isSignUp});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +39,17 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    AuthHeader(
-                      title: LocaleKeys.auth_create_account.tr(),
-                      subtitle: LocaleKeys.auth_create_account_hint.tr(),
-                    ),
+                    if (isSignUp) ...[
+                      AuthHeader(
+                        title: LocaleKeys.auth_create_account.tr(),
+                        subtitle: LocaleKeys.auth_create_account_hint.tr(),
+                      ),
+                    ] else ...[
+                      AuthHeader(
+                        title: LocaleKeys.profile_edit_profile.tr(),
+                        subtitle: LocaleKeys.edit_profile_desc.tr(),
+                      ),
+                    ],
                     const AppSpacer(heightRatio: 1.5),
                     CustomStepper(
                       currentStep: x,

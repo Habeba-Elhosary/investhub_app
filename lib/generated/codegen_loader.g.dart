@@ -132,7 +132,11 @@ class CodegenLoader extends AssetLoader{
   "the_next": "Next",
   "subscribe_now": "Subscribe Now",
   "opportunity_details": "Opportunity Details",
-  "opportunity_description": "Opportunity Description"
+  "opportunity_description": "Opportunity Description",
+  "edit_profile_desc": "Edit your profile now and click Save to update your profile.",
+  "current_password": "Current Password",
+  "new_password": "New Password",
+  "confirm_new_password": "Confirm New Password"
 };
 static const Map<String,dynamic> _lang = {};
 static const Map<String,dynamic> _ar = {
@@ -255,7 +259,11 @@ static const Map<String,dynamic> _ar = {
   "the_next": "التالى",
   "subscribe_now": "اشترك الان",
   "opportunity_details": "تفاصيل الفرصة",
-  "opportunity_description": "وصف الفرصة"
+  "opportunity_description": "وصف الفرصة",
+  "edit_profile_desc": "قم بتعديل ملفك الشخصي الآن و اضغط حفظ لتحديث الملف الشخصي الخاص بك",
+  "current_password": "كلمة المرور الحالية",
+  "new_password": "كلمة المرور الجديدة",
+  "confirm_new_password": "تأكيد كلمة المرور الجديدة"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en, "lang": _lang, "ar": _ar};
 }

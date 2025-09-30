@@ -212,7 +212,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           const AppSpacer(heightRatio: 1.5),
                           GestureDetector(
                             onTap: () {
-                              appNavigator.push(screen: SignUpScreen());
+                              appNavigator.push(
+                                screen: SignUpScreen(isSignUp: true),
+                              );
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

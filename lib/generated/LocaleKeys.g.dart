@@ -114,5 +114,9 @@ abstract class  LocaleKeys {
   static const subscribe_now = 'subscribe_now';
   static const opportunity_details = 'opportunity_details';
   static const opportunity_description = 'opportunity_description';
+  static const edit_profile_desc = 'edit_profile_desc';
+  static const current_password = 'current_password';
+  static const new_password = 'new_password';
+  static const confirm_new_password = 'confirm_new_password';
 
 }
