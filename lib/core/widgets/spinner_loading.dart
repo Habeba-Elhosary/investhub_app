@@ -9,8 +9,7 @@ class SpinnerLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      AppAssets.imagesSplashLogo,
-      // AppAssets.imagesSpinnerLoading,
+      AppAssets.imagesSpinnerLoading,
       height: 60.h,
       width: 60.w,
       color: AppColors.primary,

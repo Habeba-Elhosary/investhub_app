@@ -6,7 +6,7 @@ import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/auto_login/auto_login_cubit.dart';
-import 'package:investhub_app/features/auth/presentation/pages/sign_in/sign_in_screen.dart';
+import 'package:investhub_app/features/home/presentation/pages/main_screen.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +119,7 @@ class SplashScreenState extends State<SplashScreen>
 
     if (!_animationFinished) return;
 
-    appNavigator.pushReplacement(screen: const SignInScreen());
+    appNavigator.pushReplacement(screen: const MainScreen());
 
     // if (state is AutoLoginSeenIntro) {
     //   appNavigator.pushReplacement(screen: const SignInScreen());

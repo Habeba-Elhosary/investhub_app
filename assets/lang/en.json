@@ -90,7 +90,11 @@
     "resend": "Resend",
     "password_changed_successfully": "Password changed successfully"
   },
-  "home": {},
+  "home": {
+    "oppurtunities": "Opportunities",
+    "subscriptions": "Packages",
+    "profile" : "Profile"
+  },
   "profile": {
     "personal_account": "My Personal Account",
     "my_orders": "My Orders",

@@ -89,7 +89,11 @@
     "otp_sent_successfully": "تم ارسال الرمز بنجاح",
     "password_changed_successfully": "تم تعيين كلمة المرور بنجاح"
   },
-  "home": {},
+  "home": {
+    "oppurtunities": "الفرص",
+    "subscriptions": "الباقات",
+    "profile" : "الحساب"
+  },
   "profile": {
     "personal_account": "حسابى الشخصي",
     "my_orders": "طلباتي",

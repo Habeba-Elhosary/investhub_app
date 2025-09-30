@@ -89,6 +89,9 @@ abstract class  LocaleKeys {
   static const auth_resend = 'auth.resend';
   static const auth_password_changed_successfully = 'auth.password_changed_successfully';
   static const auth = 'auth';
+  static const home_oppurtunities = 'home.oppurtunities';
+  static const home_subscriptions = 'home.subscriptions';
+  static const home_profile = 'home.profile';
   static const home = 'home';
   static const profile_personal_account = 'profile.personal_account';
   static const profile_my_orders = 'profile.my_orders';

@@ -9,6 +9,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:investhub_app/features/home/home_injection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final GetIt sl = GetIt.instance;
@@ -18,6 +19,8 @@ abstract class ServiceLocator {
     // features
     initAuthInjection();
     initGeneralInjection();
+    initHomeInjection();
+
     // core
     injectDioHelper();
     _injectAppNavigator();

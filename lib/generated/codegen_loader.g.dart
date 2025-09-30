@@ -106,7 +106,11 @@ class CodegenLoader extends AssetLoader{
     "resend": "Resend",
     "password_changed_successfully": "Password changed successfully"
   },
-  "home": {},
+  "home": {
+    "oppurtunities": "Opportunities",
+    "subscriptions": "Packages",
+    "profile": "Profile"
+  },
   "profile": {
     "personal_account": "My Personal Account",
     "my_orders": "My Orders",
@@ -244,7 +248,11 @@ static const Map<String,dynamic> _ar = {
     "otp_sent_successfully": "تم ارسال الرمز بنجاح",
     "password_changed_successfully": "تم تعيين كلمة المرور بنجاح"
   },
-  "home": {},
+  "home": {
+    "oppurtunities": "الفرص",
+    "subscriptions": "الباقات",
+    "profile": "الحساب"
+  },
   "profile": {
     "personal_account": "حسابى الشخصي",
     "my_orders": "طلباتي",
