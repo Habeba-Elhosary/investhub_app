@@ -8,7 +8,9 @@ import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/size_config.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
+import 'package:investhub_app/features/home/presentation/pages/opportunity_details_screen.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
+import 'package:investhub_app/injection_container.dart';
 
 class OpportunitiesScreen extends StatelessWidget {
   const OpportunitiesScreen({super.key});
@@ -182,7 +184,9 @@ class OpportunityCard extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                appNavigator.push(screen: OpportunityDetailsScreen());
+              },
               child: Text(LocaleKeys.opportunity_details.tr()),
             ),
           ),
