@@ -11,7 +11,6 @@ class AppLightTheme {
     backgroundColor: AppColors.white,
     centerTitle: true,
     elevation: 0,
-    toolbarHeight: 70.h,
     iconTheme: IconThemeData(color: AppColors.primary),
     foregroundColor: AppColors.black,
     actionsIconTheme: IconThemeData(color: AppColors.primary),

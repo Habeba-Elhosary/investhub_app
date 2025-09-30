@@ -135,5 +135,6 @@ abstract class  LocaleKeys {
   static const whatsapp = 'whatsapp';
   static const the_previous = 'the_previous';
   static const the_next = 'the_next';
+  static const subscribe_now = 'subscribe_now';
 
 }

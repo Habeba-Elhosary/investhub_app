@@ -154,7 +154,8 @@ class CodegenLoader extends AssetLoader{
   "choose_contact_subtitle": "Click the method you prefer and you will be redirected to customer service",
   "whatsapp": "WhatsApp",
   "the_previous": "Previous",
-  "the_next": "Next"
+  "the_next": "Next",
+  "subscribe_now": "Subscribe Now"
 };
 static const Map<String,dynamic> _lang = {};
 static const Map<String,dynamic> _ar = {
@@ -295,7 +296,8 @@ static const Map<String,dynamic> _ar = {
   "choose_contact_subtitle": "اضغط على طريقة التواصل التى تريد وستنقلك الى خدمة العملاء",
   "whatsapp": "واتساب",
   "the_previous": "السابق",
-  "the_next": "التالى"
+  "the_next": "التالى",
+  "subscribe_now": "اشترك الان"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en, "lang": _lang, "ar": _ar};
 }
