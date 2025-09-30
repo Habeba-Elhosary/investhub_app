@@ -139,5 +139,7 @@
   "whatsapp": "WhatsApp",
   "the_previous" : "Previous",
   "the_next" : "Next",
-  "subscribe_now" : "Subscribe Now"
+  "subscribe_now" : "Subscribe Now",
+  "opportunity_details": "Opportunity Details",
+  "opportunity_description": "Opportunity Description"
 }

@@ -75,12 +75,12 @@ class SubscriptionCard extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          padding: EdgeInsets.all(10.sp),
+          padding: EdgeInsets.all(16.sp),
           decoration: BoxDecoration(
             color: AppColors.white,
             boxShadow: [
               BoxShadow(
-                color: AppColors.greyLight.withOpacity(0.7),
+                color: AppColors.greyLight.withOpacity(0.4),
                 spreadRadius: 2,
                 blurRadius: 6,
                 offset: const Offset(0, 2),

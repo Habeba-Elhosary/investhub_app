@@ -136,5 +136,7 @@ abstract class  LocaleKeys {
   static const the_previous = 'the_previous';
   static const the_next = 'the_next';
   static const subscribe_now = 'subscribe_now';
+  static const opportunity_details = 'opportunity_details';
+  static const opportunity_description = 'opportunity_description';
 
 }

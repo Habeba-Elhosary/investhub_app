@@ -155,7 +155,9 @@ class CodegenLoader extends AssetLoader{
   "whatsapp": "WhatsApp",
   "the_previous": "Previous",
   "the_next": "Next",
-  "subscribe_now": "Subscribe Now"
+  "subscribe_now": "Subscribe Now",
+  "opportunity_details": "Opportunity Details",
+  "opportunity_description": "Opportunity Description"
 };
 static const Map<String,dynamic> _lang = {};
 static const Map<String,dynamic> _ar = {
@@ -297,7 +299,9 @@ static const Map<String,dynamic> _ar = {
   "whatsapp": "واتساب",
   "the_previous": "السابق",
   "the_next": "التالى",
-  "subscribe_now": "اشترك الان"
+  "subscribe_now": "اشترك الان",
+  "opportunity_details": "تفاصيل الفرصة",
+  "opportunity_description": "وصف الفرصة"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en, "lang": _lang, "ar": _ar};
 }
