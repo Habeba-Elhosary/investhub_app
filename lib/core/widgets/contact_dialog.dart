@@ -45,7 +45,7 @@ class ContactBottomSheet extends StatelessWidget {
                     title: Text(LocaleKeys.whats_up.tr()),
                     onTap: () async {
                       final Uri phoneCallURI = Uri.parse(
-                        'whatsapp://send?phone=${state.data.replaceFirst('0', '+20')}&text=${LocaleKeys.contact_message.tr()}',
+                        'whatsapp://send?phone=${state.data.replaceFirst('0', '+20')}&text=${'LocaleKeys.contact_message.tr()'}',
                       );
                       if (!await launchUrl(
                         phoneCallURI,
@@ -78,7 +78,7 @@ class ContactBottomSheet extends StatelessWidget {
                     title: Text(LocaleKeys.sms.tr()),
                     onTap: () async {
                       final Uri phoneCallURI = Uri.parse(
-                        'sms:${state.data.replaceFirst('0', '+20')}?body=${LocaleKeys.contact_message.tr()}',
+                        'sms:${state.data.replaceFirst('0', '+20')}?body=${'LocaleKeys.contact_message.tr()'}',
                       );
                       if (!await launchUrl(
                         phoneCallURI,

@@ -1,4 +1,3 @@
-import 'package:investhub_app/core/constant/values/app_assets.dart';
 import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/enums/static_data_enum.dart';
@@ -12,7 +11,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CallCenterBottomSeet extends StatelessWidget {
@@ -68,7 +66,7 @@ class CallCenterBottomSeet extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () async {
                             final Uri whatsappUri = Uri.parse(
-                              'whatsapp://send?phone=$phone&text=${LocaleKeys.contact_message.tr()}',
+                              'whatsapp://send?phone=$phone&text=${'LocaleKeys.contact_message.tr()'}',
                             );
                             if (!await launchUrl(
                               whatsappUri,

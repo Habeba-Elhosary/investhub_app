@@ -10,8 +10,14 @@ import 'package:investhub_app/generated/LocaleKeys.g.dart';
 class AuthHeader extends StatelessWidget {
   final String title;
   final String subtitle;
+  final bool showlogo;
 
-  const AuthHeader({super.key, required this.title, required this.subtitle});
+  const AuthHeader({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    this.showlogo = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,31 +25,33 @@ class AuthHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              LocaleKeys.app_name.tr(),
-              style: TextStyles.bold24.copyWith(
-                color: AppColors.primary,
-                fontStyle: FontStyle.italic,
-                fontSize: 27.sp,
+        if (showlogo) ...[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                LocaleKeys.app_name.tr(),
+                style: TextStyles.bold24.copyWith(
+                  color: AppColors.primary,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 27.sp,
+                ),
               ),
-            ),
-            Image.asset(
-              AppAssets.imagesSplashLogo,
-              height: 30.sp,
-              color: AppColors.primary,
-            ),
-          ],
-        ),
-        const AppSpacer(heightRatio: 1.5),
-        Text(title, style: TextStyles.bold24),
+              Image.asset(
+                AppAssets.imagesSplashLogo,
+                height: 30.sp,
+                color: AppColors.primary,
+              ),
+            ],
+          ),
+          const AppSpacer(heightRatio: 1.5),
+        ],
+        Text(title, style: TextStyles.bold22),
         const AppSpacer(heightRatio: 0.5),
         Text(
           subtitle,
-          style: TextStyles.regular16.copyWith(color: Color(0xff5A6076)),
+          style: TextStyles.regular16.copyWith(color: AppColors.lightGrey),
         ),
       ],
     );

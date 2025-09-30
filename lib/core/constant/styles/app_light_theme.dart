@@ -86,8 +86,7 @@ class AppLightTheme {
     scaffoldBackgroundColor: AppColors.white,
     inputDecorationTheme: InputDecorationTheme(
       border: InputBorder.none,
-
-      suffixIconColor: AppColors.primary,
+      suffixIconColor: AppColors.greyLight,
       hintStyle: TextStyles.regular16.copyWith(color: AppColors.lightGrey),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8.r),

@@ -4,7 +4,7 @@ import 'main.dart' as runner;
 
 void main() {
   FlavorConfig(
-    color: const Color(0xFFF4F2EE),
+    color: Colors.white,
     name: 'PROD',
     variables: <String, dynamic>{
       'baseUrl': 'https://eccomerce-elkhoday.true-cons.com/api',

@@ -1,6 +1,4 @@
 import 'package:investhub_app/core/constant/values/colors.dart';
-import 'package:investhub_app/generated/LocaleKeys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,11 +8,15 @@ class PasswordTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String? value)? validator;
   final String? lable;
+  final String? hint;
+  final Color? suffixColor;
   const PasswordTextFormField({
     super.key,
     this.validator,
     required this.controller,
     this.lable,
+    this.hint,
+    this.suffixColor,
   });
 
   @override
@@ -36,12 +38,13 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: widget.controller,
       decoration: InputDecoration(
-        labelText: widget.lable ?? LocaleKeys.auth_password.tr(),
+        hintText: widget.hint,
+        labelText: widget.lable,
         suffixIcon: GestureDetector(
           onTap: () => setState(() => isObscure = !isObscure),
           child: Icon(
             isObscure ? Icons.visibility_off_rounded : Icons.visibility_rounded,
-            color: AppColors.primary,
+            color: widget.suffixColor ?? AppColors.primary,
             size: 23.sp,
           ),
         ),

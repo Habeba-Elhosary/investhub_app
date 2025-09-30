@@ -11,6 +11,7 @@ import 'package:investhub_app/core/widgets/spinner_loading.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/detect_user_by_phone/detect_user_by_phone_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/pages/create_new_password/create_new_password_screen.dart';
+import 'package:investhub_app/features/auth/presentation/pages/sign_up/sign_up_screen.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/auth_header.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
@@ -210,7 +211,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           const AppSpacer(heightRatio: 1.5),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              appNavigator.push(screen: SignUpScreen());
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
