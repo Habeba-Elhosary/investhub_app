@@ -61,7 +61,7 @@ class BottomNavBar extends StatelessWidget {
                     ),
                     AppSpacer(widthRatio: 0.5),
                     Text(
-                      items[index].title,
+                      items[index].title.tr(),
                       style: TextStyles.semiBold16.copyWith(
                         color: isActive
                             ? AppColors.primary

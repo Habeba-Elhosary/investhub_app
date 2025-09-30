@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:investhub_app/core/constant/values/app_assets.dart';
 import 'package:investhub_app/core/constant/values/colors.dart';
+import 'package:investhub_app/core/constant/values/size_config.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
+import 'package:investhub_app/core/widgets/restart_widget.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 
@@ -22,39 +24,29 @@ class LanguageBottomSheet {
         return StatefulBuilder(
           builder: (context, setState) {
             return Padding(
-              padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 32.h),
+              padding: SizeConfig.paddingSymmetric,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AppSpacer(heightRatio: 3),
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            'LocaleKeys.student_profile_select_language.tr()',
-                            style: TextStyles.bold18,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () => appNavigator.pop(),
-                        child: Icon(Icons.close, color: AppColors.primary),
-                      ),
-                    ],
-                  ),
-
                   AppSpacer(heightRatio: 2),
+                  Center(
+                    child: Text(
+                      LocaleKeys.profile_change_language.tr(),
+                      style: TextStyles.bold20.copyWith(
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ),
+                  AppSpacer(heightRatio: 1),
+
                   Image.asset(
                     AppAssets.imagesLanguage,
                     width: 100.sp,
                     height: 100.sp,
+                    color: AppColors.primary,
                   ),
-
-                  AppSpacer(heightRatio: 2),
-
+                  AppSpacer(heightRatio: 1),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -65,6 +57,7 @@ class LanguageBottomSheet {
                         isSelected: selectedLanguage == 'ar',
                         onTap: () => setState(() => selectedLanguage = 'ar'),
                       ),
+                      AppSpacer(widthRatio: 0.7),
                       _buildLanguageOption(
                         label: 'English',
                         flag: '🇺🇸',
@@ -74,7 +67,7 @@ class LanguageBottomSheet {
                     ],
                   ),
 
-                  AppSpacer(heightRatio: 2),
+                  AppSpacer(heightRatio: 1),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -84,25 +77,13 @@ class LanguageBottomSheet {
                         } else {
                           context.setLocale(const Locale('en'));
                         }
-                        // context
-                        //     .read<GetEducationDataCubit>()
-                        //     .getEducationDataEvent();
+                        RestartWidget.restartApp(context);
                         appNavigator.pop();
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1E56A0),
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(vertical: 16.h),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                      ),
-                      child: Text(
-                        LocaleKeys.confirm.tr(),
-                        style: TextStyles.bold16,
-                      ),
+                      child: Text(LocaleKeys.confirm.tr()),
                     ),
                   ),
+                  AppSpacer(heightRatio: 1),
                 ],
               ),
             );
@@ -118,36 +99,42 @@ class LanguageBottomSheet {
     required bool isSelected,
     required VoidCallback onTap,
   }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(
-            color: isSelected ? Color(0xFF1E56A0) : Colors.grey.shade300,
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(8.r),
+            border: Border.all(
+              color: isSelected
+                  ? AppColors.primary
+                  : AppColors.unActiveBorderColor,
+            ),
           ),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              isSelected
-                  ? Icons.radio_button_checked
-                  : Icons.radio_button_unchecked,
-              color: isSelected ? Color(0xFF1E56A0) : Colors.grey,
-            ),
-
-            AppSpacer(widthRatio: 1.5),
-            Text(
-              label,
-              style: TextStyles.regular16.copyWith(
-                color: AppColors.darkPrimary,
+          child: Row(
+            children: [
+              Icon(
+                isSelected
+                    ? Icons.radio_button_checked
+                    : Icons.radio_button_unchecked,
+                color: isSelected
+                    ? AppColors.primary
+                    : AppColors.unActiveBorderColor,
               ),
-            ),
-            AppSpacer(widthRatio: 1.5),
-            Text(flag, style: TextStyle(fontSize: 24)),
-          ],
+
+              AppSpacer(widthRatio: 1.5),
+              Text(
+                label,
+                style: TextStyles.regular16.copyWith(
+                  color: AppColors.darkPrimary,
+                ),
+              ),
+              AppSpacer(widthRatio: 1.5),
+              Text(flag, style: TextStyle(fontSize: 24)),
+            ],
+          ),
         ),
       ),
     );

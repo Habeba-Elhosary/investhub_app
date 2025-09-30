@@ -1,3 +1,4 @@
+import 'package:investhub_app/core/widgets/restart_widget.dart';
 import 'package:investhub_app/generated/codegen_loader.g.dart';
 import 'package:investhub_app/injection_container.dart';
 import 'package:investhub_app/app.dart';
@@ -29,7 +30,7 @@ void main() async {
       path: 'assets/lang',
       fallbackLocale: const Locale('en'),
       assetLoader: const CodegenLoader(),
-      child: InvestHubApp(),
+      child: RestartWidget(child: InvestHubApp()),
     ),
   );
 }

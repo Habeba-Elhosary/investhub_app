@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investhub_app/core/constant/values/app_assets.dart';
 import 'package:investhub_app/features/home/domain/entities/bottom_navigation_entity.dart';
@@ -15,17 +14,17 @@ class BottomNavigationCubit extends Cubit<int> {
   List<BottomNavigationEntity> items = [
     BottomNavigationEntity(
       icon: AppAssets.imagesHome,
-      title: LocaleKeys.home_oppurtunities.tr(),
+      title: LocaleKeys.home_oppurtunities,
       page: OpportunitiesScreen(),
     ),
     BottomNavigationEntity(
       icon: AppAssets.imagesPackages,
-      title: LocaleKeys.home_subscriptions.tr(),
+      title: LocaleKeys.home_subscriptions,
       page: SubscriptionsScreen(),
     ),
     BottomNavigationEntity(
       icon: AppAssets.imagesUser,
-      title: LocaleKeys.home_profile.tr(),
+      title: LocaleKeys.home_profile,
       page: ProfileScreen(),
     ),
   ];

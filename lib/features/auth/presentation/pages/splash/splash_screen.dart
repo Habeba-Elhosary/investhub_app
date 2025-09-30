@@ -189,6 +189,7 @@ class SplashScreenState extends State<SplashScreen>
                       style: TextStyles.semiBold24.copyWith(
                         color: AppColors.white,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                     AppSpacer(heightRatio: 1),
                     Text(
@@ -196,6 +197,7 @@ class SplashScreenState extends State<SplashScreen>
                       style: TextStyles.regular20.copyWith(
                         color: AppColors.white,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
