@@ -31,7 +31,7 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      // key: registerCubit.formKeyStep2,
+      key: widget.registerCubit.formKeyStep2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

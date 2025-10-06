@@ -20,7 +20,7 @@ class Validator {
       //   return LocaleKeys.validationMessages_name_must_trio.tr();
       // }
       if (value.length < 3) {
-        return LocaleKeys.validationMessages_name_short_input;
+        return LocaleKeys.validationMessages_name_short_input.tr();
       }
     }
     return null;

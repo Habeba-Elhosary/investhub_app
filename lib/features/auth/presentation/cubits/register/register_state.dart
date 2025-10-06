@@ -1,24 +1,33 @@
 part of 'register_cubit.dart';
 
-sealed class RegisterState extends Equatable {
+abstract class RegisterState extends Equatable {
   const RegisterState();
 
   @override
-  List<Object> get props => <Object>[];
+  List<Object?> get props => [];
 }
 
-final class RegisterInitial extends RegisterState {}
-   
-   
-final class RegisterLoading extends RegisterState {}
+class RegisterInitial extends RegisterState {}
 
-final class RegisterError extends RegisterState {
+class RegisterLoading extends RegisterState {}
+
+class RegisterFailure extends RegisterState {
   final String message;
 
-  const RegisterError({required this.message});
+  const RegisterFailure(this.message);
 
   @override
-  List<Object> get props => <Object>[message];
+  List<Object?> get props => [message];
 }
 
-final class RegisterSuccess extends RegisterState {}
+class RegisterSuccess extends RegisterState {}
+
+class RegisterStepChanged extends RegisterState {
+  final int step;
+
+  const RegisterStepChanged(this.step);
+
+  @override
+  List<Object?> get props => [step];
+}
+

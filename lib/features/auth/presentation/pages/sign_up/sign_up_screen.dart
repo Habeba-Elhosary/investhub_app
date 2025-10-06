@@ -3,18 +3,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/core/widgets/custom_stepper.dart';
+import 'package:investhub_app/core/widgets/spinner_loading.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/pages/sign_in/sign_in_screen.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/auth_header.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_one.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_three.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_two.dart';
-import 'package:investhub_app/features/home/presentation/pages/main_screen.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 
@@ -24,7 +23,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int x = 2;
     return BlocProvider<RegisterCubit>(
       create: (context) => sl<RegisterCubit>(),
       child: Scaffold(
@@ -53,8 +51,7 @@ class SignUpScreen extends StatelessWidget {
                     ],
                     const AppSpacer(heightRatio: 1.5),
                     CustomStepper(
-                      currentStep: x,
-                      // currentStep: registerCubit.currentStep,
+                      currentStep: registerCubit.currentStep,
                       steps: [
                         LocaleKeys.auth_personal_info.tr(),
                         LocaleKeys.auth_financial_info.tr(),
@@ -66,49 +63,46 @@ class SignUpScreen extends StatelessWidget {
                     AppSpacer(heightRatio: 1),
                     Row(
                       children: [
-                        if (x > 0)
+                        if (registerCubit.currentStep > 0)
                           Expanded(
                             child: OutlinedButton(
-                              onPressed: () {},
-                              // onPressed: registerCubit.goToPreviousStep,
+                              onPressed: registerCubit.goToPreviousStep,
                               child: Text(LocaleKeys.the_previous.tr()),
                             ),
                           ),
 
-                        if (x > 0) AppSpacer(widthRatio: 0.5),
+                        if (registerCubit.currentStep > 0)
+                          AppSpacer(widthRatio: 0.5),
                         Expanded(
                           child: BlocBuilder<RegisterCubit, RegisterState>(
-                            // buildWhen: (previous, current) =>
-                            //     current is! RegisterStepChanged,
+                            buildWhen: (previous, current) =>
+                                current is! RegisterStepChanged,
                             builder: (context, state) {
                               return Visibility(
                                 visible: state is! RegisterLoading,
-                                // replacement: const SpinnerLoading(),
+                                replacement: const SpinnerLoading(),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    if (x == 2) {
-                                      appNavigator.pushReplacement(
-                                        screen: const MainScreen(),
-                                      );
-                                      // if (registerCubit
-                                      //         .formKeyStep1
-                                      //         .currentState
-                                      //         ?.validate() ??
-                                      //     false) {
-                                      // registerCubit.goToNextStep();
-                                      // }
+                                    if (registerCubit.currentStep == 0) {
+                                      if (registerCubit
+                                              .formKeyStep1
+                                              .currentState
+                                              ?.validate() ??
+                                          false) {
+                                        registerCubit.goToNextStep();
+                                      }
                                     } else {
-                                      // if (registerCubit
-                                      //         .formKeyStep2
-                                      //         .currentState
-                                      //         ?.validate() ??
-                                      //     false) {
-                                      // registerCubit.submit();
-                                      // }
+                                      if (registerCubit
+                                              .formKeyStep2
+                                              .currentState
+                                              ?.validate() ??
+                                          false) {
+                                        registerCubit.submit();
+                                      }
                                     }
                                   },
                                   child: Text(
-                                    x != 2
+                                    registerCubit.currentStep != 2
                                         ? LocaleKeys.the_next.tr()
                                         : LocaleKeys.auth_create_account.tr(),
                                   ),
@@ -154,7 +148,7 @@ class SignUpScreen extends StatelessWidget {
 }
 
 Widget buildRegisterForm(RegisterCubit registerCubit) {
-  switch (2) {
+  switch (registerCubit.currentStep) {
     case 0:
       return RegisterFormOne(registerCubit: registerCubit);
     case 1:

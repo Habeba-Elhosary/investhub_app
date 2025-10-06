@@ -15,14 +15,14 @@ class RegisterFormOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      // key: registerCubit.formKeyStep1,
+      key: registerCubit.formKeyStep1,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(LocaleKeys.auth_full_name.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
           TextFormField(
-            // controller: registerCubit.nameController,
+            controller: registerCubit.nameController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             onTapOutside: (PointerDownEvent event) =>
                 FocusScope.of(context).unfocus(),
@@ -37,7 +37,7 @@ class RegisterFormOne extends StatelessWidget {
           Text(LocaleKeys.auth_email.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
           TextFormField(
-            // controller: registerCubit.phoneController,
+            controller: registerCubit.emailController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             onTapOutside: (PointerDownEvent event) =>
                 FocusScope.of(context).unfocus(),
@@ -52,7 +52,7 @@ class RegisterFormOne extends StatelessWidget {
           Text(LocaleKeys.auth_phone_number.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
           TextFormField(
-            // controller: registerCubit.nationalIdController,
+            controller: registerCubit.phoneController,
             onTapOutside: (PointerDownEvent event) =>
                 FocusScope.of(context).unfocus(),
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -67,8 +67,7 @@ class RegisterFormOne extends StatelessWidget {
           Text(LocaleKeys.auth_password.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
           PasswordTextFormField(
-            controller: TextEditingController(text: ''),
-            // controller: registerCubit.passwordController,
+            controller: registerCubit.passwordController,
             hint: LocaleKeys.auth_enter_password.tr(),
             suffixColor: AppColors.greyLight,
           ),
@@ -76,7 +75,7 @@ class RegisterFormOne extends StatelessWidget {
           Text(LocaleKeys.auth_national_id.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
           TextFormField(
-            // controller: registerCubit.nationalIdController,
+            controller: registerCubit.nationalIdController,
             onTapOutside: (PointerDownEvent event) =>
                 FocusScope.of(context).unfocus(),
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -91,8 +90,7 @@ class RegisterFormOne extends StatelessWidget {
           Text(LocaleKeys.auth_birth_date.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
           TextFormField(
-            // controller: registerCubit.nationalIdController,
-            // enabled: false,
+            controller: registerCubit.birthDateController,
             onTapOutside: (PointerDownEvent event) =>
                 FocusScope.of(context).unfocus(),
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -109,6 +107,11 @@ class RegisterFormOne extends StatelessWidget {
                 firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
               );
+              if (pickedDate != null) {
+                registerCubit.setBirthDate(
+                  DateFormat('yyyy-MM-dd').format(pickedDate),
+                );
+              }
             },
           ),
         ],
