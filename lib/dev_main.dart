@@ -8,7 +8,7 @@ void main() {
     name: 'DEV',
     location: BannerLocation.topStart,
     variables: <String, dynamic>{
-      'baseUrl': 'https://eccomerce-elkhoday.true-cons.net/api',
+      'baseUrl': 'https://basierah.com/api/v1/mobile',
     },
   );
   runner.main();

@@ -91,8 +91,8 @@ class OpportunityCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('2300.0', style: TextStyles.bold20),
-                  AppSpacer(widthRatio: 0.5),
+                  Text('2300.0', style: TextStyles.bold18),
+                  AppSpacer(widthRatio: 0.2),
                   Image.asset(AppAssets.imagesSaudiRiyalSymbol, height: 18.sp),
                 ],
               ),
@@ -103,8 +103,8 @@ class OpportunityCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('2300.0', style: TextStyles.bold20),
-                  AppSpacer(widthRatio: 0.5),
+                  Text('2300.0', style: TextStyles.bold18),
+                  AppSpacer(widthRatio: 0.2),
                   Image.asset(AppAssets.imagesSaudiRiyalSymbol, height: 18.sp),
                 ],
               ),

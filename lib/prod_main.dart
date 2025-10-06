@@ -7,7 +7,7 @@ void main() {
     color: Colors.white,
     name: 'PROD',
     variables: <String, dynamic>{
-      'baseUrl': 'https://eccomerce-elkhoday.true-cons.com/api',
+      'baseUrl': '',
     },
   );
   runner.main();
