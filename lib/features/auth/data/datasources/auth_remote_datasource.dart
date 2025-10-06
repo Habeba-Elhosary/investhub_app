@@ -5,7 +5,7 @@ import 'package:investhub_app/features/auth/data/models/detect_user_response.dar
 import 'package:investhub_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 
-const String loginAPI = '/auth/login';
+const String loginAPI = '/auth/sign/in';
 const String registerAPI = '/auth/register';
 const String userProfileAPI = 'auth/profile';
 const String forgetPasswordAPI = '/auth/forget-password';
@@ -19,12 +19,10 @@ abstract class AuthRemoteDatasource {
   Future<AuthResponse> login({
     required String phone,
     required String password,
-    // required String fcmToken,
   });
 
   Future<AuthResponse> register({
     required RegisterParams params,
-    // required String fcmToken,
   });
   Future<AuthResponse> forgetPassword({required String phone});
   Future<Unit> createNewPassword({
@@ -56,7 +54,6 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
         body: <String, dynamic>{
           'phone': phone,
           'password': password,
-          // 'device_token': fcmToken,
         },
       );
       return AuthResponse.fromJson(response);
@@ -68,14 +65,12 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   @override
   Future<AuthResponse> register({
     required RegisterParams params,
-    // required String fcmToken,
   }) async {
     try {
       final response = await apiBaseHelper.post(
         url: registerAPI,
         body: {
           ...params.toJson(),
-          // 'device_token': fcmToken
         },
       );
       return AuthResponse.fromJson(response);

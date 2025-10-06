@@ -13,7 +13,6 @@ import 'package:investhub_app/features/auth/presentation/cubits/login/login_cubi
 import 'package:investhub_app/features/auth/presentation/pages/create_new_password/create_new_password_screen.dart';
 import 'package:investhub_app/features/auth/presentation/pages/sign_up/sign_up_screen.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/auth_header.dart';
-import 'package:investhub_app/features/home/presentation/pages/main_screen.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -101,9 +100,6 @@ class _SignInScreenState extends State<SignInScreen> {
                             },
                           ),
                           const AppSpacer(heightRatio: 1),
-
-                          // if (detectUserState
-                          //     is DetectUserByPhoneHasActiveUser) ...[
                           PasswordTextFormField(
                             lable: LocaleKeys.auth_password.tr(),
                             controller: passwordController,
@@ -150,27 +146,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                               .validate()) {
                                             return;
                                           }
-                                          appNavigator.popToFrist();
-                                          appNavigator.pushReplacement(
-                                            screen: const MainScreen(),
+                                          context.read<LoginCubit>().loginEvent(
+                                            phone: phoneController.text,
+                                            password: passwordController.text,
                                           );
-
-                                          // if (detectUserState
-                                          //     is DetectUserByPhoneHasActiveUser) {
-                                          //   context
-                                          //       .read<LoginCubit>()
-                                          //       .loginEvent(
-                                          //         phone: phoneController.text,
-                                          //         password:
-                                          //             passwordController.text,
-                                          //       );
-                                          // } else {
-                                          //   context
-                                          //       .read<DetectUserByPhoneCubit>()
-                                          //       .detectUserByPhoneEvent(
-                                          //         phone: phoneController.text,
-                                          //       );
-                                          // }
                                         },
                                         child: Text(
                                           LocaleKeys.auth_signin.tr(),
