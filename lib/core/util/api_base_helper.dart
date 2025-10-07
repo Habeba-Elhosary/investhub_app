@@ -167,7 +167,7 @@ class ApiBaseHelper {
       case 400:
         throw ServerException(
           message: response.data['message'],
-          // errorMap: response.data['errors'],
+          errorMap: response.data['errors'],
         );
       case 422:
         throw ServerException(

@@ -1,10 +1,14 @@
 // ignore_for_file: deprecated_member_use
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/register/register_cubit.dart';
-import 'package:investhub_app/features/general/domain/entities/registration_questions_response.dart';
+import 'package:investhub_app/features/general/presentation/cubits/registration_questions/registration_questions_cubit.dart';
+import 'package:investhub_app/generated/LocaleKeys.g.dart';
 
 class RegisterFormThree extends StatefulWidget {
   final RegisterCubit registerCubit;
@@ -15,75 +19,100 @@ class RegisterFormThree extends StatefulWidget {
 }
 
 class _RegisterFormThreeState extends State<RegisterFormThree> {
-  final List<Question> questions = [
-    Question(question: 'هل لديك خبرة سابقة في الاستثمار بالأسهم ؟', id: 1),
-    Question(
-      question: 'هل أنت مستعد للمخاطرة بخسارة جزء من رأس المال ؟',
-      id: 2,
-    ),
-    Question(question: 'هل لديك مصدر دخل ثابت لتغطية نفقاتك الأساسية ؟', id: 3),
-    Question(
-      question: 'هل تخطط لسحب أموالك المستثمرة في غضون 1-3 سنوات ؟',
-      id: 4,
-    ),
-    Question(
-      question: 'هل تفضل الاستثمارات ذات العوائد المرتفعة والمخاطر العالية ؟',
-      id: 5,
-    ),
-    Question(
-      question: 'هل تستشير مستشاراً مالياً قبل اتخاذ قرارات الاستثمار ؟',
-      id: 6,
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    final cubit = context.read<RegistrationQuestionsCubit>();
+    if (cubit.state is! RegistrationQuestionsLoaded) {
+      cubit.getRegistrationQuestions();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: questions.length,
-        itemBuilder: (context, index) {
-          final question = questions[index];
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(question.question, style: TextStyles.regular18),
-              Row(
-                children: [
-                  Expanded(
-                    child: RadioListTile<bool>(
-                      title: const Text('نعم'),
-                      value: true,
-                      activeColor: AppColors.primary,
-                      // groupValue: question.isChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          // question.isChecked = value!;
-                        });
-                      },
+    final registerCubit = widget.registerCubit;
+
+    return BlocBuilder<RegistrationQuestionsCubit, RegistrationQuestionsState>(
+      builder: (context, state) {
+        if (state is RegistrationQuestionsLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (state is RegistrationQuestionsError) {
+          return Center(child: Text(state.message));
+        }
+
+        if (state is RegistrationQuestionsLoaded) {
+          final questions = state.questions;
+
+          return Form(
+            key: registerCubit.formKeyStep3,
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: questions.length,
+              itemBuilder: (context, index) {
+                final question = questions[index];
+
+                // ✅ هنا نجيب الإجابة المحفوظة من الكيوبت لو موجودة
+                final savedAnswer = registerCubit.answers.firstWhere(
+                  (element) => element['question_id'] == question.id,
+                  orElse: () => {},
+                );
+
+                if (savedAnswer.isNotEmpty) {
+                  question.answer = savedAnswer['answer'];
+                }
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(question.question, style: TextStyles.regular18),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RadioListTile<String>(
+                            title: Text(LocaleKeys.yes.tr()),
+                            value: "yes",
+                            groupValue: question.answer,
+                            activeColor: AppColors.primary,
+                            onChanged: (value) {
+                              if (value == null) return;
+                              setState(() {
+                                question.answer = value;
+                              });
+                              registerCubit.updateAnswer(question.id, value);
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: RadioListTile<String>(
+                            title: Text(LocaleKeys.no.tr()),
+                            value: "no",
+                            groupValue: question.answer,
+                            activeColor: AppColors.primary,
+                            onChanged: (value) {
+                              if (value == null) return;
+                              setState(() {
+                                question.answer = value;
+                              });
+                              registerCubit.updateAnswer(question.id, value);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Expanded(
-                    child: RadioListTile<bool>(
-                      title: const Text('لا'),
-                      activeColor: AppColors.primary,
-                      value: false,
-                      // groupValue: question.isChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          // question.isChecked = value!;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              if (index != questions.length - 1) AppSpacer(heightRatio: 0.5),
-            ],
+                    if (index != questions.length - 1)
+                      AppSpacer(heightRatio: 0.5),
+                  ],
+                );
+              },
+            ),
           );
-        },
-      ),
+        }
+
+        return const SizedBox.shrink();
+      },
     );
   }
 }

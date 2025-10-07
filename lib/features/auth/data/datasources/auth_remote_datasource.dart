@@ -6,31 +6,31 @@ import 'package:investhub_app/features/auth/domain/repositories/auth_repository.
 import 'package:dartz/dartz.dart';
 
 const String loginAPI = '/auth/sign/in';
-const String registerAPI = '/auth/register';
+const String registerAPI = '/auth/sign/up';
+const String verfiyCodeAPI = '/otp/verify';
+
 const String userProfileAPI = 'auth/profile';
 const String forgetPasswordAPI = '/auth/forget-password';
 const String createNewPasswordAPI = '/auth/reset-password';
-const String verfiyCodeAPI = '/auth/verify-otp';
 const String sendOTPCodeAPI = '/auth/resend-otp';
 const String logoutAPI = '/auth/logout';
 const String detectUserByPhoneAPI = '/auth/detect-user-by-phone';
 
 abstract class AuthRemoteDatasource {
-  Future<AuthResponse> login({
-    required String phone,
-    required String password,
-  });
+  Future<AuthResponse> login({required String phone, required String password});
 
-  Future<AuthResponse> register({
-    required RegisterParams params,
-  });
+  Future<AuthResponse> register({required RegisterParams params});
   Future<AuthResponse> forgetPassword({required String phone});
   Future<Unit> createNewPassword({
     required String password,
     required String passwordConfirmation,
     required String token,
   });
-  Future<Unit> verifyCode({required String code, required String token});
+  Future<Unit> verifyCode({
+    required String code,
+    required String otpToken,
+    required String token,
+  });
   Future<Unit> sendOTPCode({required String token});
   Future<AuthResponse> getUserProfile(String token);
   Future<StatusResponse> logout({required String token});
@@ -46,15 +46,11 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   Future<AuthResponse> login({
     required String phone,
     required String password,
-    // required String fcmToken,
   }) async {
     try {
       final response = await apiBaseHelper.post(
         url: loginAPI,
-        body: <String, dynamic>{
-          'phone': phone,
-          'password': password,
-        },
+        body: <String, dynamic>{'phone': phone, 'password': password},
       );
       return AuthResponse.fromJson(response);
     } catch (e) {
@@ -63,15 +59,11 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   }
 
   @override
-  Future<AuthResponse> register({
-    required RegisterParams params,
-  }) async {
+  Future<AuthResponse> register({required RegisterParams params}) async {
     try {
       final response = await apiBaseHelper.post(
         url: registerAPI,
-        body: {
-          ...params.toJson(),
-        },
+        body: {...params.toJson()},
       );
       return AuthResponse.fromJson(response);
     } catch (e) {
@@ -157,12 +149,16 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   }
 
   @override
-  Future<Unit> verifyCode({required String code, required String token}) async {
+  Future<Unit> verifyCode({
+    required String code,
+    required String otpToken,
+    required String token,
+  }) async {
     try {
       await apiBaseHelper.post(
         url: verfiyCodeAPI,
         token: token,
-        body: <String, dynamic>{'code': code},
+        body: <String, dynamic>{'otp': code, 'otp_token': otpToken},
       );
       return unit;
     } catch (e) {

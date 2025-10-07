@@ -8,33 +8,24 @@ import 'package:investhub_app/features/auth/data/models/auth_response.dart';
 import 'package:investhub_app/features/auth/data/models/detect_user_response.dart';
 import 'package:investhub_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
-// import 'package:firebase_notifications_handler/firebase_notifications_handler.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRemoteDatasource authRemoteDatasource;
-  // final FirebaseMessaging firebaseMessaging;
-
   AuthLocalDataSource local;
 
-  AuthRepositoryImpl({
-    required this.authRemoteDatasource,
-    required this.local,
-    // required this.firebaseMessaging,
-  });
+  AuthRepositoryImpl({required this.authRemoteDatasource, required this.local});
 
   @override
   Future<Either<Failure, User>> autoLogin() async {
     try {
       final (String phone, String password) = await local.getUserCredentials();
-      // await waitForFcmToken();
       final AuthResponse authResponse = await authRemoteDatasource.login(
         phone: phone,
         password: password,
-        // fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
       );
-      await local.cacheUser(authResponse.data.user);
-      await local.cacheUserAccessToken(token: authResponse.data.accessToken);
-      return right(authResponse.data.user);
+      await local.cacheUser(authResponse.data);
+      await local.cacheUserAccessToken(token: authResponse.data.token);
+      return right(authResponse.data);
     } on ServerException catch (error) {
       try {
         final User cachedUser = await local.getCacheUser();
@@ -56,15 +47,13 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     try {
-      // await waitForFcmToken();
       final AuthResponse data = await authRemoteDatasource.login(
         phone: phone,
         password: password,
-        // fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
       );
-      await local.cacheUserAccessToken(token: data.data.accessToken);
+      await local.cacheUserAccessToken(token: data.data.token);
       await local.cacheUserCredentials(phone: phone, password: password);
-      local.cacheUser(data.data.user);
+      local.cacheUser(data.data);
       return right(data);
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
@@ -76,17 +65,11 @@ class AuthRepositoryImpl implements AuthRepository {
     required RegisterParams params,
   }) async {
     try {
-      // await waitForFcmToken();
       final AuthResponse data = await authRemoteDatasource.register(
-        // fcmToken: FirebaseNotificationsHandler.fcmToken ?? '',
         params: params,
       );
-      await local.cacheUserAccessToken(token: data.data.accessToken);
-      await local.cacheUserCredentials(
-        phone: params.phone,
-        password: params.password,
-      );
-      local.cacheUser(data.data.user);
+      await local.cacheUserOtpToken(token: data.data.otpToken);
+      await local.cacheUserAccessToken(token: data.data.token);
       return right(data);
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
@@ -168,8 +151,13 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, Unit>> verifyCode(String code) async {
     try {
+      final String otpToken = await local.getCacheUserOtpToken();
       final String token = await local.getUserAccessToken();
-      await authRemoteDatasource.verifyCode(code: code, token: token);
+      await authRemoteDatasource.verifyCode(
+        code: code,
+        otpToken: otpToken,
+        token: token,
+      );
       return right(unit);
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));

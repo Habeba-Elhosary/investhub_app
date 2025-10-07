@@ -36,6 +36,7 @@
     "title2": "Your gateway to financial success, invest wisely and confidently"
   },
   "auth": {
+    "please_answer_all_questions" : "Please answer all questions",
     "personal_info":"Personal Info",
     "financial_info":"Financial Info",
     "risk_info":"Risk knowledge assessment",
@@ -124,7 +125,7 @@
   "more": "More",
   "pound": "EGP",
   "yes": "Yes",
-  "no": "No, I don’t want",
+  "no": "No",
   "retry": "Retry",
   "the_previous" : "Previous",
   "the_next" : "Next",

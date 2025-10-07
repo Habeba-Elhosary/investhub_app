@@ -2,7 +2,7 @@ import 'package:investhub_app/core/widgets/single_drop_down_selector.dart';
 
 class BanksResponse {
   final int status;
-  final String message;
+  final String? message;
   final List<Bank> data;
 
   BanksResponse({

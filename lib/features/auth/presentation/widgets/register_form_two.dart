@@ -43,6 +43,13 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
           ),
           AppSpacer(heightRatio: 0.5),
           DropdownButtonFormField<MaritalStatus>(
+            validator: (value) {
+              if (value == null) {
+                return LocaleKeys.validationMessages_error_filed_required.tr();
+              }
+              return null;
+            },
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             isDense: true,
             decoration: InputDecoration(
               hintText: LocaleKeys.auth_select_marital_status.tr(),
@@ -134,6 +141,13 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
           ),
           AppSpacer(heightRatio: 0.5),
           DropdownButtonFormField<EducationalStatus>(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) {
+              if (value == null) {
+                return LocaleKeys.validationMessages_error_filed_required.tr();
+              }
+              return null;
+            },
             isDense: true,
             decoration: InputDecoration(
               hintText: LocaleKeys.auth_select_education_level.tr(),

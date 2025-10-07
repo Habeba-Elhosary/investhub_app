@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:investhub_app/core/widgets/toast.dart';
 import 'package:investhub_app/features/auth/data/models/auth_response.dart';
 import 'package:investhub_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:investhub_app/features/auth/domain/usecases/register_usecase.dart';
+import 'package:investhub_app/features/auth/presentation/pages/verify_otp/verify_otp_screen.dart';
 import 'package:investhub_app/features/general/domain/entities/banks_response.dart';
 import 'package:investhub_app/features/home/presentation/pages/main_screen.dart';
 import 'package:investhub_app/injection_container.dart';
@@ -31,6 +33,9 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController annualIncomeController = TextEditingController();
   final TextEditingController totalSavingController = TextEditingController();
   Bank? usedBank;
+
+  // Controllers Step 3
+  final List<Map<String, dynamic>> answers = [];
 
   final formKeyStep1 = GlobalKey<FormState>();
   final formKeyStep2 = GlobalKey<FormState>();
@@ -63,6 +68,18 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterInitial());
   }
 
+  void updateAnswer(int questionId, String answer) {
+    final index = answers.indexWhere(
+      (item) => item["question_id"] == questionId,
+    );
+    if (index != -1) {
+      answers[index]["answer"] = answer;
+    } else {
+      answers.add({"question_id": questionId, "answer": answer});
+    }
+    emit(RegisterInitial());
+  }
+
   void goToNextStep() {
     if (currentStep == 0 && formKeyStep1.currentState!.validate()) {
       currentStep = 1;
@@ -87,9 +104,18 @@ class RegisterCubit extends Cubit<RegisterState> {
       name: nameController.text,
       phone: phoneController.text,
       password: passwordController.text,
-      confirmPassword: nameController.text,
+      email: emailController.text,
+      nationalId: nationalIdController.text,
+      birthDate: birthDateController.text,
+      maritalStatus: maritalStatus!,
+      familyNum: familyNumber,
+      educationalLevel: educationalLevel!,
+      annualIncome: num.tryParse(annualIncomeController.text) ?? 0,
+      totalSaving: num.tryParse(totalSavingController.text) ?? 0,
+      bank: usedBank!,
+      answers: answers,
     );
-
+    log(params.toJson().toString());
     emit(RegisterLoading());
     final result = await registerUsecase(params);
     result.fold(
@@ -98,13 +124,18 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(RegisterFailure(failure.message));
       },
       (AuthResponse authResponse) {
-        appNavigator.pushReplacement(screen: const MainScreen());
+        if (authResponse.data.otpVerified == false) {
+          appNavigator.pushReplacement(screen: const OTPVerficationScreen());
+        } else {
+          appNavigator.pushReplacement(screen: const MainScreen());
+        }
         emit(RegisterSuccess());
       },
     );
   }
 
   @override
+
   Future<void> close() {
     nameController.dispose();
     phoneController.dispose();
@@ -112,7 +143,8 @@ class RegisterCubit extends Cubit<RegisterState> {
     nationalIdController.dispose();
     passwordController.dispose();
     birthDateController.dispose();
-
+    annualIncomeController.dispose();
+    totalSavingController.dispose();
     return super.close();
   }
 }

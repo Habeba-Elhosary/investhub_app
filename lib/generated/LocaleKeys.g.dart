@@ -35,6 +35,7 @@ abstract class  LocaleKeys {
   static const splash_title1 = 'splash.title1';
   static const splash_title2 = 'splash.title2';
   static const splash = 'splash';
+  static const auth_please_answer_all_questions = 'auth.please_answer_all_questions';
   static const auth_personal_info = 'auth.personal_info';
   static const auth_financial_info = 'auth.financial_info';
   static const auth_risk_info = 'auth.risk_info';

@@ -52,6 +52,7 @@ class CodegenLoader extends AssetLoader{
     "title2": "Your gateway to financial success, invest wisely and confidently"
   },
   "auth": {
+    "please_answer_all_questions": "Please answer all questions",
     "personal_info": "Personal Info",
     "financial_info": "Financial Info",
     "risk_info": "Risk knowledge assessment",
@@ -140,7 +141,7 @@ class CodegenLoader extends AssetLoader{
   "more": "More",
   "pound": "EGP",
   "yes": "Yes",
-  "no": "No, I don’t want",
+  "no": "No",
   "retry": "Retry",
   "the_previous": "Previous",
   "the_next": "Next",
@@ -192,6 +193,7 @@ static const Map<String,dynamic> _ar = {
     "title2": "بوابتك للنجاح المالي، استثمر بذكاء وثقة"
   },
   "auth": {
+    "please_answer_all_questions": "يرجى الرد على جميع الاسئلة",
     "personal_info": "البيانات الشخصية",
     "financial_info": "البيانات المالية",
     "risk_info": "تقييم المعرفة{} بالمخاطر",

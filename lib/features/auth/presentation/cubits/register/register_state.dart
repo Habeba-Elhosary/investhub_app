@@ -30,4 +30,3 @@ class RegisterStepChanged extends RegisterState {
   @override
   List<Object?> get props => [step];
 }
-

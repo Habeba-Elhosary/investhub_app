@@ -162,6 +162,7 @@ class _CoreSingleSelectorDropdownState<
           );
         }
         return DropdownButtonFormField<SelectorItem>(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(label: Text(widget.label)),
           value: value,
           validator: widget.validator,

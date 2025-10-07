@@ -28,7 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
       },
       (AuthResponse authResponse) {
         showSucessToast(authResponse.message!);
-        sl<AutoLoginCubit>().setUser = authResponse.data.user;
+        sl<AutoLoginCubit>().setUser = authResponse.data;
         emit(LoginSuccess());
         sl<AutoLoginCubit>().emitHasUserAsState();
         appNavigator.popUtill(screen: const MainScreen());

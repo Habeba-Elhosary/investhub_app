@@ -7,7 +7,7 @@ import 'package:investhub_app/core/services/cache_service.dart';
 import 'package:investhub_app/features/auth/data/models/auth_response.dart';
 
 const String _accessTokenKey = 'ACCESS_TOKEN';
-const String _deviceTokenKey = 'DEVICE_TOKEN';
+const String _otpTokenKey = 'OTP_TOKEN';
 const String _passwordKey = 'PASSWORD';
 const String _phoneKey = 'PHONE';
 const String USER_DATA_KEY = 'USER_DATA';
@@ -20,11 +20,11 @@ abstract class AuthLocalDataSource {
     required String password,
   });
   Future<(String phone, String password)> getUserCredentials();
-  Future<void> cacheUserDeviceToken({required String? deviceToken});
+  Future<void> cacheUserOtpToken({required String token});
   Future<String> getUserAccessToken();
   Future<void> cacheUser(User user);
   Future<User> getCacheUser();
-  Future<String> getCacheUserDeviceToken();
+  Future<String> getCacheUserOtpToken();
   Future<String> checkAccessForGuest();
   Future<void> clearData();
 }
@@ -44,9 +44,9 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
   }
 
   @override
-  Future<void> cacheUserDeviceToken({required String? deviceToken}) async {
+  Future<void> cacheUserOtpToken({required String token}) async {
     try {
-      await cacheService.setSecureString(_deviceTokenKey, deviceToken ?? '');
+      await cacheService.setSecureString(_otpTokenKey, token);
     } catch (_) {
       throw CacheException();
     }
@@ -64,12 +64,10 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
   }
 
   @override
-  Future<String> getCacheUserDeviceToken() async {
+  Future<String> getCacheUserOtpToken() async {
     try {
-      final String? deviceToken = await cacheService.getSecureString(
-        _deviceTokenKey,
-      );
-      if (deviceToken != null) return deviceToken;
+      final String? token = await cacheService.getSecureString(_otpTokenKey);
+      if (token != null) return token;
       throw CacheException();
     } catch (_) {
       throw CacheException();

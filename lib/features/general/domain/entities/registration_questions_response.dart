@@ -1,6 +1,6 @@
 class RegistrationQuestionsResponse {
   final int status;
-  final String message;
+  final String? message;
   final List<Question> data;
 
   const RegistrationQuestionsResponse({
@@ -28,11 +28,12 @@ class RegistrationQuestionsResponse {
 class Question {
   final int id;
   final String question;
+  String? answer;
 
-  const Question({required this.id, required this.question});
+  Question({required this.id, required this.question, this.answer});
 
   factory Question.fromJson(Map<String, dynamic> json) =>
       Question(id: json["id"], question: json["question"]);
 
-  Map<String, dynamic> toJson() => {"id": id, "question": question};
+  Map<String, dynamic> toJson() => {"question_id": id, "answer": answer};
 }

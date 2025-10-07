@@ -30,7 +30,7 @@ class GeneralRemoteDataSourceImpl implements GeneralRemoteDataSource {
       final response = await apiBaseHelper.get(
         url: getRegistrationQuestionsAPI,
       );
-      return response;
+      return RegistrationQuestionsResponse.fromJson(response);
     } catch (e) {
       rethrow;
     }

@@ -20,6 +20,19 @@ MaritalStatus getMaritalStatusFromString(String type) {
   }
 }
 
+String getMaritalStatusValue(MaritalStatus type) {
+  switch (type) {
+    case MaritalStatus.single:
+      return "single";
+    case MaritalStatus.married:
+      return "married";
+    case MaritalStatus.divorced:
+      return "divorced";
+    case MaritalStatus.widowed:
+      return "widowed";
+  }
+}
+
 String getMaritalStatusString(MaritalStatus type) {
   switch (type) {
     case MaritalStatus.single:

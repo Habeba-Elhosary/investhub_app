@@ -8,12 +8,14 @@ import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/core/widgets/custom_stepper.dart';
 import 'package:investhub_app/core/widgets/spinner_loading.dart';
+import 'package:investhub_app/core/widgets/toast.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/pages/sign_in/sign_in_screen.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/auth_header.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_one.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_three.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_two.dart';
+import 'package:investhub_app/features/general/presentation/cubits/registration_questions/registration_questions_cubit.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 
@@ -100,13 +102,29 @@ class SignUpScreen extends StatelessWidget {
                                         registerCubit.goToNextStep();
                                       }
                                     } else {
-                                      if (registerCubit
-                                              .formKeyStep3
-                                              .currentState
-                                              ?.validate() ??
-                                          false) {
-                                        registerCubit.submit();
+                                      final registrationQuestionsCubit = context
+                                          .read<RegistrationQuestionsCubit>();
+                                      final state =
+                                          registrationQuestionsCubit.state;
+
+                                      if (state
+                                          is RegistrationQuestionsLoaded) {
+                                        final questions = state.questions;
+                                        final hasEmpty = questions.any(
+                                          (q) => q.answer == null,
+                                        );
+
+                                        if (hasEmpty) {
+                                          showErrorToast(
+                                            LocaleKeys
+                                                .auth_please_answer_all_questions
+                                                .tr(),
+                                          );
+                                          return;
+                                        }
                                       }
+
+                                      registerCubit.submit();
                                     }
                                   },
                                   child: Text(
