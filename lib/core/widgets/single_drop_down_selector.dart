@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_types_as_parameter_names
 
+import 'package:investhub_app/core/constant/values/fonts.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/spinner_loading.dart';
 import 'package:equatable/equatable.dart';
@@ -168,12 +169,21 @@ class _CoreSingleSelectorDropdownState<
             this.value = value;
             widget.onChanged(value as SelectorItem);
           },
-          hint: Text(widget.hintText ?? '', style: TextStyles.regular12),
+          hint: Text(
+            widget.hintText ?? '',
+            style: TextStyles.regular16.copyWith(fontFamily: AppFonts.tajawal),
+          ),
           items: widget.options
               .map(
                 (SelectorItem e) => DropdownMenuItem<SelectorItem>(
                   value: e,
-                  child: Text(e.name),
+                  child: Text(
+                    e.name,
+                    style: TextStyles.regular16.copyWith(
+                      fontFamily: AppFonts.tajawal,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               )
               .toList(),

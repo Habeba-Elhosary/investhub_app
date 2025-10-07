@@ -121,6 +121,20 @@ class CodegenLoader extends AssetLoader{
     "log_out": "Log Out",
     "log_out_message": "Are you sure you want to log out ?"
   },
+  "marital_status": {
+    "single": "Single",
+    "married": "Married",
+    "divorced": "Divorced",
+    "widowed": "Widowed"
+  },
+  "educational_status": {
+    "high_school": "High School",
+    "diploma": "Diploma",
+    "bachelor": "Bachelor",
+    "master": "Master",
+    "phd": "PhD",
+    "others": "Other"
+  },
   "send": "Send",
   "confirm": "Confirm",
   "more": "More",
@@ -136,7 +150,8 @@ class CodegenLoader extends AssetLoader{
   "edit_profile_desc": "Edit your profile now and click Save to update your profile.",
   "current_password": "Current Password",
   "new_password": "New Password",
-  "confirm_new_password": "Confirm New Password"
+  "confirm_new_password": "Confirm New Password",
+  "more_than_one_person": "The number of people cannot be less than 1"
 };
 static const Map<String,dynamic> _lang = {};
 static const Map<String,dynamic> _ar = {
@@ -245,6 +260,20 @@ static const Map<String,dynamic> _ar = {
     "log_out": "تسجيل الخروج",
     "log_out_message": "هل تريد تسجيل خروجك من التطبيق ؟"
   },
+  "marital_status": {
+    "single": "أعزب",
+    "married": "متزوج",
+    "divorced": "مطلق",
+    "widowed": "أرمل"
+  },
+  "educational_status": {
+    "high_school": "الثانوية العامة",
+    "diploma": "دبلوم",
+    "bachelor": "بكالوريوس",
+    "master": "ماجستير",
+    "phd": "دكتوراه",
+    "others": "أخرى"
+  },
   "send": "إرسال",
   "confirm": "تأكيد",
   "more": "المزيد",
@@ -263,7 +292,8 @@ static const Map<String,dynamic> _ar = {
   "edit_profile_desc": "قم بتعديل ملفك الشخصي الآن و اضغط حفظ لتحديث الملف الشخصي الخاص بك",
   "current_password": "كلمة المرور الحالية",
   "new_password": "كلمة المرور الجديدة",
-  "confirm_new_password": "تأكيد كلمة المرور الجديدة"
+  "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+  "more_than_one_person": "لا يمكن ان يكون عدد الاشخاص اقل من 1"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en, "lang": _lang, "ar": _ar};
 }

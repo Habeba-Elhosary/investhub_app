@@ -1,14 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:investhub_app/core/constant/values/app_assets.dart';
 import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/fonts.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
+import 'package:investhub_app/core/enums/educational_status_enum.dart';
+import 'package:investhub_app/core/enums/marital_status_enum.dart';
 import 'package:investhub_app/core/util/validator.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
+import 'package:investhub_app/core/widgets/single_drop_down_selector.dart';
 import 'package:investhub_app/core/widgets/toast.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/register/register_cubit.dart';
+import 'package:investhub_app/features/general/domain/entities/banks_response.dart';
+import 'package:investhub_app/features/general/presentation/cubits/get_banks/get_banks_cubit.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 
 class RegisterFormTwo extends StatefulWidget {
@@ -20,13 +26,9 @@ class RegisterFormTwo extends StatefulWidget {
 }
 
 class _RegisterFormTwoState extends State<RegisterFormTwo> {
-  String? maritalStatus;
   String? educationLevel;
   String? bank;
   int familyMembers = 1;
-
-  final incomeController = TextEditingController();
-  final savingsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,28 +42,30 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
             style: TextStyles.regular16,
           ),
           AppSpacer(heightRatio: 0.5),
-          DropdownButtonFormField<String>(
+          DropdownButtonFormField<MaritalStatus>(
             isDense: true,
             decoration: InputDecoration(
               hintText: LocaleKeys.auth_select_marital_status.tr(),
               alignLabelWithHint: true,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 0,
-              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 24),
             ),
             style: TextStyles.regular16.copyWith(
               fontFamily: AppFonts.tajawal,
               color: Colors.black,
             ),
-            items: const [
-              DropdownMenuItem(value: "اعزب", child: Text("أعزب")),
-              DropdownMenuItem(value: "متزوج", child: Text("متزوج")),
-              DropdownMenuItem(value: "مطلق", child: Text("مطلق")),
-              DropdownMenuItem(value: "أرمل", child: Text("أرمل")),
-            ],
-            onChanged: (String? value) {},
+            value: widget.registerCubit.maritalStatus,
+            items: MaritalStatus.values.map((status) {
+              return DropdownMenuItem<MaritalStatus>(
+                value: status,
+                child: Text(getMaritalStatusString(status)),
+              );
+            }).toList(),
+            onChanged: (MaritalStatus? value) {
+              if (value == null) return;
+              widget.registerCubit.setMaterialStatus(value);
+            },
           ),
+
           AppSpacer(heightRatio: 0.7),
           Text(LocaleKeys.auth_family_number.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
@@ -69,12 +73,13 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
             children: [
               GestureDetector(
                 onTap: () {
-                  if (familyMembers > 1) {
-                    setState(() {
-                      familyMembers--;
-                    });
+                  final currentValue = widget.registerCubit.familyNumber;
+                  if (currentValue > 1) {
+                    final newValue = currentValue - 1;
+                    widget.registerCubit.setFamilyNumber(newValue);
+                    setState(() {});
                   } else {
-                    showErrorToast('لا يمكن ان يكون عدد الاشخاص اقل من 1');
+                    showErrorToast(LocaleKeys.more_than_one_person.tr());
                   }
                 },
                 child: Container(
@@ -96,16 +101,19 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(
-                    child: Text("$familyMembers", style: TextStyles.regular20),
+                    child: Text(
+                      "${widget.registerCubit.familyNumber}",
+                      style: TextStyles.regular20,
+                    ),
                   ),
                 ),
               ),
               AppSpacer(widthRatio: 0.5),
               GestureDetector(
                 onTap: () {
-                  setState(() {
-                    familyMembers++;
-                  });
+                  final newValue = widget.registerCubit.familyNumber + 1;
+                  widget.registerCubit.setFamilyNumber(newValue);
+                  setState(() {});
                 },
                 child: Container(
                   height: 55.sp,
@@ -125,11 +133,10 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
             style: TextStyles.regular16,
           ),
           AppSpacer(heightRatio: 0.5),
-          DropdownButtonFormField<String>(
+          DropdownButtonFormField<EducationalStatus>(
             isDense: true,
             decoration: InputDecoration(
               hintText: LocaleKeys.auth_select_education_level.tr(),
-
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 24,
                 vertical: 0,
@@ -139,22 +146,23 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
               fontFamily: AppFonts.tajawal,
               color: Colors.black,
             ),
-            items: const [
-              DropdownMenuItem(value: "ابتدائي", child: Text("ابتدائي")),
-              DropdownMenuItem(value: "متوسط", child: Text("متوسط")),
-              DropdownMenuItem(value: "ثانوي", child: Text("ثانوي")),
-              DropdownMenuItem(value: "دبلوم", child: Text("دبلوم")),
-              DropdownMenuItem(value: "بكالوريوس", child: Text("بكالوريوس")),
-              DropdownMenuItem(value: "ماجستير", child: Text("ماجستير")),
-              DropdownMenuItem(value: "دكتوراه", child: Text("دكتوراه")),
-            ],
-            onChanged: (String? value) {},
+            value: widget.registerCubit.educationalLevel,
+            items: EducationalStatus.values.map((status) {
+              return DropdownMenuItem<EducationalStatus>(
+                value: status,
+                child: Text(getEducationalStatusString(status)),
+              );
+            }).toList(),
+            onChanged: (EducationalStatus? value) {
+              if (value == null) return;
+              widget.registerCubit.setEducationalLevel(value);
+            },
           ),
           AppSpacer(heightRatio: 0.7),
           Text(LocaleKeys.auth_yearly_income.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
           TextFormField(
-            // controller: registerCubit.nationalIdController,
+            controller: widget.registerCubit.annualIncomeController,
             onTapOutside: (PointerDownEvent event) =>
                 FocusScope.of(context).unfocus(),
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -178,7 +186,7 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
           Text(LocaleKeys.auth_total_savings.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
           TextFormField(
-            // controller: registerCubit.nationalIdController,
+            controller: widget.registerCubit.totalSavingController,
             onTapOutside: (PointerDownEvent event) =>
                 FocusScope.of(context).unfocus(),
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -201,34 +209,24 @@ class _RegisterFormTwoState extends State<RegisterFormTwo> {
           AppSpacer(heightRatio: 0.7),
           Text(LocaleKeys.auth_used_bank.tr(), style: TextStyles.regular16),
           AppSpacer(heightRatio: 0.5),
-          DropdownButtonFormField<String>(
-            isDense: true,
-            decoration: InputDecoration(
-              hintText: LocaleKeys.auth_select_bank.tr(),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 0,
-              ),
-            ),
-            style: TextStyles.regular16.copyWith(
-              fontFamily: AppFonts.tajawal,
-              color: Colors.black,
-            ),
-            items: const [
-              DropdownMenuItem(value: "الراجحي", child: Text("مصرف الراجحي")),
-              DropdownMenuItem(
-                value: "الاهلي",
-                child: Text("البنك الأهلي السعودي"),
-              ),
-              DropdownMenuItem(value: "الرياض", child: Text("بنك الرياض")),
-              DropdownMenuItem(value: "الانماء", child: Text("بنك الإنماء")),
-              DropdownMenuItem(value: "الجزيرة", child: Text("بنك الجزيرة")),
-              DropdownMenuItem(
-                value: "العربي",
-                child: Text("البنك العربي الوطني"),
-              ),
-            ],
-            onChanged: (String? value) {},
+          CoreSingleSelectorDropdown<
+            GetBanksCubit,
+            GetBanksState,
+            GetBanksLoading,
+            GetBanksError,
+            Bank
+          >(
+            validator: (Bank? value) => Validator.defaultValidator(value?.name),
+            options: context.watch<GetBanksCubit>().banks,
+            onChanged: (Bank value) {
+              widget.registerCubit.setBank(value);
+            },
+            hintText: LocaleKeys.auth_select_bank.tr(),
+            label: '',
+            initState: () {
+              context.read<GetBanksCubit>().getBanksEvent();
+            },
+            initValue: widget.registerCubit.usedBank,
           ),
         ],
       ),

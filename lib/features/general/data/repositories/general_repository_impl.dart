@@ -1,8 +1,9 @@
-import 'package:investhub_app/core/entities/status_response.dart';
 import 'package:investhub_app/core/error/exceptions.dart';
 import 'package:investhub_app/core/error/failures.dart';
 import 'package:investhub_app/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:investhub_app/features/general/data/datasources/general_remote_datasource.dart';
+import 'package:investhub_app/features/general/domain/entities/banks_response.dart';
+import 'package:investhub_app/features/general/domain/entities/registration_questions_response.dart';
 import 'package:investhub_app/features/general/domain/repositories/general_repository.dart';
 import 'package:dartz/dartz.dart';
 
@@ -16,19 +17,19 @@ class GeneralRepositoryImpl implements GeneralRepository {
   });
 
   @override
-  Future<Either<Failure, StatusResponse>> sendComplaint(String content) async {
+  Future<Either<Failure, BanksResponse>> getBanks() async {
     try {
-      final String token = await authLocalDataSource.getUserAccessToken();
-      return right(await generalRemoteDataSource.sendComplaint(content, token));
+      return right(await generalRemoteDataSource.getBanks());
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
     }
   }
 
   @override
-  Future<Either<Failure, String>> getStaticData(String type) async {
+  Future<Either<Failure, RegistrationQuestionsResponse>>
+  getRegistrationQuestions() async {
     try {
-      return right(await generalRemoteDataSource.getStaticData(type));
+      return right(await generalRemoteDataSource.getRegistrationQuestions());
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
     }

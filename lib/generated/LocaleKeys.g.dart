@@ -102,6 +102,18 @@ abstract class  LocaleKeys {
   static const profile_log_out = 'profile.log_out';
   static const profile_log_out_message = 'profile.log_out_message';
   static const profile = 'profile';
+  static const marital_status_single = 'marital_status.single';
+  static const marital_status_married = 'marital_status.married';
+  static const marital_status_divorced = 'marital_status.divorced';
+  static const marital_status_widowed = 'marital_status.widowed';
+  static const marital_status = 'marital_status';
+  static const educational_status_high_school = 'educational_status.high_school';
+  static const educational_status_diploma = 'educational_status.diploma';
+  static const educational_status_bachelor = 'educational_status.bachelor';
+  static const educational_status_master = 'educational_status.master';
+  static const educational_status_phd = 'educational_status.phd';
+  static const educational_status_others = 'educational_status.others';
+  static const educational_status = 'educational_status';
   static const send = 'send';
   static const confirm = 'confirm';
   static const more = 'more';
@@ -118,5 +130,6 @@ abstract class  LocaleKeys {
   static const current_password = 'current_password';
   static const new_password = 'new_password';
   static const confirm_new_password = 'confirm_new_password';
+  static const more_than_one_person = 'more_than_one_person';
 
 }

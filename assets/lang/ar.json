@@ -104,6 +104,20 @@
     "log_out": "تسجيل الخروج",
     "log_out_message": "هل تريد تسجيل خروجك من التطبيق ؟"
   },
+  "marital_status": {
+    "single": "أعزب",
+    "married": "متزوج",
+    "divorced": "مطلق",
+    "widowed": "أرمل"
+  },
+  "educational_status": {
+    "high_school": "الثانوية العامة",
+    "diploma": "دبلوم",
+    "bachelor": "بكالوريوس",
+    "master": "ماجستير",
+    "phd": "دكتوراه",
+    "others": "أخرى"
+  },
   "send": "إرسال",
   "confirm": "تأكيد",
   "more": "المزيد",
@@ -119,8 +133,9 @@
   "subscribe_now": "اشترك الان",
   "opportunity_details": "تفاصيل الفرصة",
   "opportunity_description": "وصف الفرصة",
-  "edit_profile_desc" : "قم بتعديل ملفك الشخصي الآن و اضغط حفظ لتحديث الملف الشخصي الخاص بك",
-  "current_password" : "كلمة المرور الحالية",
-  "new_password" : "كلمة المرور الجديدة",
-  "confirm_new_password" : "تأكيد كلمة المرور الجديدة"
+  "edit_profile_desc": "قم بتعديل ملفك الشخصي الآن و اضغط حفظ لتحديث الملف الشخصي الخاص بك",
+  "current_password": "كلمة المرور الحالية",
+  "new_password": "كلمة المرور الجديدة",
+  "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+  "more_than_one_person": "لا يمكن ان يكون عدد الاشخاص اقل من 1"
 }

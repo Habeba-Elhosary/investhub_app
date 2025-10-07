@@ -9,6 +9,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:investhub_app/features/general/presentation/cubits/get_banks/get_banks_cubit.dart';
+import 'package:investhub_app/features/general/presentation/cubits/registration_questions/registration_questions_cubit.dart';
 import 'package:investhub_app/features/home/home_injection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,6 +37,11 @@ abstract class ServiceLocator {
     BlocProvider<ThemeCubit>(create: (_) => sl<ThemeCubit>()),
     BlocProvider<AutoLoginCubit>(
       create: (_) => sl<AutoLoginCubit>()..fAutoLogin(),
+    ),
+    BlocProvider<GetBanksCubit>(create: (_) => sl<GetBanksCubit>()),
+    BlocProvider<RegistrationQuestionsCubit>(
+      create: (_) =>
+          sl<RegistrationQuestionsCubit>()..getRegistrationQuestions(),
     ),
   ];
 }

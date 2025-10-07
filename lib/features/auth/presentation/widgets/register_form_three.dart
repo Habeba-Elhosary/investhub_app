@@ -4,6 +4,7 @@ import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/register/register_cubit.dart';
+import 'package:investhub_app/features/general/domain/entities/registration_questions_response.dart';
 
 class RegisterFormThree extends StatefulWidget {
   final RegisterCubit registerCubit;
@@ -15,14 +16,24 @@ class RegisterFormThree extends StatefulWidget {
 
 class _RegisterFormThreeState extends State<RegisterFormThree> {
   final List<Question> questions = [
-    Question(text: 'هل لديك خبرة سابقة في الاستثمار بالأسهم ؟'),
-    Question(text: 'هل أنت مستعد للمخاطرة بخسارة جزء من رأس المال ؟'),
-    Question(text: 'هل لديك مصدر دخل ثابت لتغطية نفقاتك الأساسية ؟'),
-    Question(text: 'هل تخطط لسحب أموالك المستثمرة في غضون 1-3 سنوات ؟'),
+    Question(question: 'هل لديك خبرة سابقة في الاستثمار بالأسهم ؟', id: 1),
     Question(
-      text: 'هل تفضل الاستثمارات ذات العوائد المرتفعة والمخاطر العالية ؟',
+      question: 'هل أنت مستعد للمخاطرة بخسارة جزء من رأس المال ؟',
+      id: 2,
     ),
-    Question(text: 'هل تستشير مستشاراً مالياً قبل اتخاذ قرارات الاستثمار ؟'),
+    Question(question: 'هل لديك مصدر دخل ثابت لتغطية نفقاتك الأساسية ؟', id: 3),
+    Question(
+      question: 'هل تخطط لسحب أموالك المستثمرة في غضون 1-3 سنوات ؟',
+      id: 4,
+    ),
+    Question(
+      question: 'هل تفضل الاستثمارات ذات العوائد المرتفعة والمخاطر العالية ؟',
+      id: 5,
+    ),
+    Question(
+      question: 'هل تستشير مستشاراً مالياً قبل اتخاذ قرارات الاستثمار ؟',
+      id: 6,
+    ),
   ];
 
   @override
@@ -37,7 +48,7 @@ class _RegisterFormThreeState extends State<RegisterFormThree> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(question.text, style: TextStyles.regular18),
+              Text(question.question, style: TextStyles.regular18),
               Row(
                 children: [
                   Expanded(
@@ -45,10 +56,10 @@ class _RegisterFormThreeState extends State<RegisterFormThree> {
                       title: const Text('نعم'),
                       value: true,
                       activeColor: AppColors.primary,
-                      groupValue: question.isChecked,
+                      // groupValue: question.isChecked,
                       onChanged: (value) {
                         setState(() {
-                          question.isChecked = value!;
+                          // question.isChecked = value!;
                         });
                       },
                     ),
@@ -58,10 +69,10 @@ class _RegisterFormThreeState extends State<RegisterFormThree> {
                       title: const Text('لا'),
                       activeColor: AppColors.primary,
                       value: false,
-                      groupValue: question.isChecked,
+                      // groupValue: question.isChecked,
                       onChanged: (value) {
                         setState(() {
-                          question.isChecked = value!;
+                          // question.isChecked = value!;
                         });
                       },
                     ),
@@ -75,11 +86,4 @@ class _RegisterFormThreeState extends State<RegisterFormThree> {
       ),
     );
   }
-}
-
-class Question {
-  final String text;
-  bool? isChecked; // true = نعم, false = لا, null = لسه مختارش
-
-  Question({required this.text, this.isChecked});
 }

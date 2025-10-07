@@ -91,9 +91,17 @@ class SignUpScreen extends StatelessWidget {
                                           false) {
                                         registerCubit.goToNextStep();
                                       }
-                                    } else {
+                                    } else if (registerCubit.currentStep == 1) {
                                       if (registerCubit
                                               .formKeyStep2
+                                              .currentState
+                                              ?.validate() ??
+                                          false) {
+                                        registerCubit.goToNextStep();
+                                      }
+                                    } else {
+                                      if (registerCubit
+                                              .formKeyStep3
                                               .currentState
                                               ?.validate() ??
                                           false) {

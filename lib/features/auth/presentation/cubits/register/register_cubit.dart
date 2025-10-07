@@ -1,10 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:investhub_app/core/enums/educational_status_enum.dart';
+import 'package:investhub_app/core/enums/marital_status_enum.dart';
 import 'package:investhub_app/core/widgets/toast.dart';
 import 'package:investhub_app/features/auth/data/models/auth_response.dart';
 import 'package:investhub_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:investhub_app/features/auth/domain/usecases/register_usecase.dart';
+import 'package:investhub_app/features/general/domain/entities/banks_response.dart';
 import 'package:investhub_app/features/home/presentation/pages/main_screen.dart';
 import 'package:investhub_app/injection_container.dart';
 part 'register_state.dart';
@@ -22,21 +25,41 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController birthDateController = TextEditingController();
 
   // Controllers Step 2
-  final TextEditingController regionController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
-  final TextEditingController selectedPositionController =
-      TextEditingController();
-  final TextEditingController productCategoriesController =
-      TextEditingController();
+  MaritalStatus? maritalStatus;
+  int familyNumber = 1;
+  EducationalStatus? educationalLevel;
+  final TextEditingController annualIncomeController = TextEditingController();
+  final TextEditingController totalSavingController = TextEditingController();
+  Bank? usedBank;
 
   final formKeyStep1 = GlobalKey<FormState>();
   final formKeyStep2 = GlobalKey<FormState>();
+  final formKeyStep3 = GlobalKey<FormState>();
 
   int currentStep = 0;
 
   void setBirthDate(String date) {
     birthDateController.text = date;
+    emit(RegisterInitial());
+  }
+
+  void setMaterialStatus(MaritalStatus status) {
+    maritalStatus = status;
+    emit(RegisterInitial());
+  }
+
+  void setEducationalLevel(EducationalStatus level) {
+    educationalLevel = level;
+    emit(RegisterInitial());
+  }
+
+  void setBank(Bank bank) {
+    usedBank = bank;
+    emit(RegisterInitial());
+  }
+
+  void setFamilyNumber(int number) {
+    familyNumber = number;
     emit(RegisterInitial());
   }
 
@@ -64,7 +87,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       name: nameController.text,
       phone: phoneController.text,
       password: passwordController.text,
-      confirmPassword: confirmPasswordController.text,
+      confirmPassword: nameController.text,
     );
 
     emit(RegisterLoading());
@@ -90,10 +113,6 @@ class RegisterCubit extends Cubit<RegisterState> {
     passwordController.dispose();
     birthDateController.dispose();
 
-    regionController.dispose();
-    confirmPasswordController.dispose();
-    selectedPositionController.dispose();
-    productCategoriesController.dispose();
     return super.close();
   }
 }

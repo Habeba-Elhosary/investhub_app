@@ -105,6 +105,20 @@
     "log_out": "Log Out",
     "log_out_message": "Are you sure you want to log out ?"
   },
+  "marital_status":{
+    "single": "Single",
+    "married": "Married",
+    "divorced": "Divorced",
+    "widowed": "Widowed"
+  },
+  "educational_status": {
+    "high_school": "High School",
+    "diploma": "Diploma",
+    "bachelor": "Bachelor",
+    "master": "Master",
+    "phd": "PhD",
+    "others": "Other"
+  },
   "send": "Send",
   "confirm": "Confirm",
   "more": "More",
@@ -120,5 +134,6 @@
   "edit_profile_desc" : "Edit your profile now and click Save to update your profile.",
   "current_password" : "Current Password",
   "new_password" : "New Password",
-  "confirm_new_password" : "Confirm New Password"
+  "confirm_new_password" : "Confirm New Password",
+  "more_than_one_person"  : "The number of people cannot be less than 1"
 }
