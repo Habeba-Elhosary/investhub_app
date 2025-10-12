@@ -7,12 +7,18 @@ import 'package:investhub_app/core/enums/marital_status_enum.dart';
 import 'package:investhub_app/core/error/failures.dart';
 import 'package:investhub_app/features/auth/data/models/auth_response.dart';
 import 'package:investhub_app/features/auth/data/models/detect_user_response.dart';
+import 'package:investhub_app/features/auth/domain/entities/change_password_params.dart';
+import 'package:investhub_app/features/auth/presentation/cubits/google_login/google_login_cubit.dart';
 import 'package:investhub_app/features/general/domain/entities/banks_response.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, AuthResponse>> login({
     required String phone,
     required String password,
+  });
+
+  Future<Either<Failure, AuthResponse>> googleLogin({
+    required SocialCredentials socialCredentials,
   });
 
   Future<Either<Failure, User>> autoLogin();
@@ -26,12 +32,25 @@ abstract class AuthRepository {
     required String password,
     required String passwordConfirmation,
   });
-  Future<Either<Failure, Unit>> verifyCode(String code);
+  Future<Either<Failure, String>> verifyCode(String code);
+  Future<Either<Failure, String>> verifyForgetPasswordOTP({
+    required String phone,
+    required String otp,
+    required String otpToken,
+  });
+  Future<Either<Failure, String>> resetPassword({
+    required String phone,
+    required String password,
+    required String resetToken,
+  });
   Future<Either<Failure, Unit>> sendOTPCode();
   Future<Either<Failure, AuthResponse>> getUserProfile();
 
   Future<Either<Failure, StatusResponse>> logout();
   Future<Either<Failure, DetectUserResponse>> detectUser(String phone);
+  Future<Either<Failure, String>> changePassword({
+    required ChangePasswordParams params,
+  });
 }
 
 class RegisterParams {
@@ -65,13 +84,24 @@ class RegisterParams {
     required this.answers,
   });
 
+  String _convertArabicToEnglishNumbers(String input) {
+    const arabicNumbers = '٠١٢٣٤٥٦٧٨٩';
+    const englishNumbers = '0123456789';
+
+    String result = input;
+    for (int i = 0; i < arabicNumbers.length; i++) {
+      result = result.replaceAll(arabicNumbers[i], englishNumbers[i]);
+    }
+    return result;
+  }
+
   Map<String, dynamic> toJson() => {
     "name": name,
     "email": email,
     "phone": phone,
     "password": password,
     "national_id": nationalId,
-    "date_of_birth": birthDate,
+    "date_of_birth": _convertArabicToEnglishNumbers(birthDate),
     "marital_status": maritalStatus.name,
     "family_members_count": familyNum,
     "education_level": educationalLevel.name,

@@ -28,7 +28,13 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       (AuthResponse user) {
         emit(ForgetPasswordSuccess());
         appNavigator.popToFrist();
-        appNavigator.push(screen: const OTPVerficationScreen());
+        appNavigator.push(
+          screen: OTPVerficationScreen(
+            otpToken: user.data.otpToken,
+            phone: phone,
+            isLoginContext: false,
+          ),
+        );
       },
     );
   }

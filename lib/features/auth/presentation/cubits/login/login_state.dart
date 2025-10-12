@@ -15,7 +15,15 @@ final class LoginError extends LoginState {
   final String message;
 
   const LoginError({required this.message});
-
 }
 
 final class LoginSuccess extends LoginState {}
+
+final class LoginOtpRequired extends LoginState {
+  final String otpToken;
+
+  const LoginOtpRequired({required this.otpToken});
+
+  @override
+  List<Object> get props => [otpToken];
+}

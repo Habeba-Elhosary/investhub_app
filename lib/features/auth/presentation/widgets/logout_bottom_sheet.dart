@@ -8,7 +8,8 @@ import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 
 class LogOutBottomSheet extends StatelessWidget {
-  const LogOutBottomSheet({super.key});
+  final Function() onLogout;
+  const LogOutBottomSheet({super.key, required this.onLogout});
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +49,7 @@ class LogOutBottomSheet extends StatelessWidget {
                         //     child:
                         ElevatedButton(
                           onPressed: () {
+                            onLogout();
                             // context.read<LogoutCubit>().logoutEvent();
                           },
                           child: Text(

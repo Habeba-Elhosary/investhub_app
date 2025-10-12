@@ -84,6 +84,13 @@ class Validator {
       if (value.length < 8) {
         return LocaleKeys.validationMessages_error_password_validation.tr();
       }
+      if (!RegExp(r'[A-Z]').hasMatch(value)) {
+        return LocaleKeys.validationMessages_error_password_capital_letter.tr();
+      }
+      if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+        return LocaleKeys.validationMessages_error_password_special_character
+            .tr();
+      }
     }
     return null;
   }

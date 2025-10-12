@@ -3,12 +3,12 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecases.dart';
 import '../repositories/auth_repository.dart';
 
-class VerifyCodeUsecase extends UseCase<Unit, String> {
+class VerifyCodeUsecase extends UseCase<String, String> {
   final AuthRepository authRepository;
 
   VerifyCodeUsecase({required this.authRepository});
 
   @override
-  Future<Either<Failure, Unit>> call(String params) =>
+  Future<Either<Failure, String>> call(String params) =>
       authRepository.verifyCode(params);
 }

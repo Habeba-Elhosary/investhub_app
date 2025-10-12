@@ -6,8 +6,10 @@ import 'package:investhub_app/features/auth/data/datasources/auth_local_datasour
 import 'package:investhub_app/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:investhub_app/features/auth/data/models/auth_response.dart';
 import 'package:investhub_app/features/auth/data/models/detect_user_response.dart';
+import 'package:investhub_app/features/auth/domain/entities/change_password_params.dart';
 import 'package:investhub_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:investhub_app/features/auth/presentation/cubits/google_login/google_login_cubit.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRemoteDatasource authRemoteDatasource;
@@ -55,6 +57,37 @@ class AuthRepositoryImpl implements AuthRepository {
       await local.cacheUserCredentials(phone: phone, password: password);
       local.cacheUser(data.data);
       return right(data);
+    } on OtpVerificationRequiredException catch (error) {
+      return left(
+        OtpVerificationRequiredFailure(
+          message: error.message,
+          otpToken: error.otpToken,
+        ),
+      );
+    } on ServerException catch (error) {
+      return left(ServerFailure.formServerException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, AuthResponse>> googleLogin({
+    required SocialCredentials socialCredentials,
+  }) async {
+    try {
+      final AuthResponse data = await authRemoteDatasource.googleLogin(
+        socialCredentials: socialCredentials,
+      );
+      await local.cacheUserAccessToken(token: data.data.token);
+      // await local.cacheUserCredentials(phone: phone, password: password);
+      local.cacheUser(data.data);
+      return right(data);
+    } on OtpVerificationRequiredException catch (error) {
+      return left(
+        OtpVerificationRequiredFailure(
+          message: error.message,
+          otpToken: error.otpToken,
+        ),
+      );
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
     }
@@ -102,6 +135,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final AuthResponse data = await authRemoteDatasource.forgetPassword(
         phone: phone,
       );
+      await local.cacheUserOtpToken(token: data.data.otpToken);
       return right(data);
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
@@ -149,16 +183,63 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> verifyCode(String code) async {
+  Future<Either<Failure, String>> verifyCode(String code) async {
     try {
       final String otpToken = await local.getCacheUserOtpToken();
-      final String token = await local.getUserAccessToken();
-      await authRemoteDatasource.verifyCode(
+
+      String? token;
+      try {
+        token = await local.getUserAccessToken();
+      } on CacheException {
+        token = null;
+      }
+
+      final String message = await authRemoteDatasource.verifyCode(
         code: code,
         otpToken: otpToken,
         token: token,
       );
-      return right(unit);
+      return right(message);
+    } on ServerException catch (error) {
+      return left(ServerFailure.formServerException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> verifyForgetPasswordOTP({
+    required String phone,
+    required String otp,
+    required String otpToken,
+  }) async {
+    try {
+      print('AuthRepositoryImpl: verifyForgetPasswordOTP called');
+      print(
+        'AuthRepositoryImpl: Phone: $phone, OTP: $otp, OTPToken: $otpToken',
+      );
+      final String resetToken = await authRemoteDatasource
+          .verifyForgetPasswordOTP(phone: phone, otp: otp, otpToken: otpToken);
+      print('AuthRepositoryImpl: ResetToken received: $resetToken');
+      print('AuthRepositoryImpl: ResetToken length: ${resetToken.length}');
+      return right(resetToken);
+    } on ServerException catch (error) {
+      print('AuthRepositoryImpl: ServerException: ${error.message}');
+      return left(ServerFailure.formServerException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> resetPassword({
+    required String phone,
+    required String password,
+    required String resetToken,
+  }) async {
+    try {
+      final String message = await authRemoteDatasource.resetPassword(
+        phone: phone,
+        password: password,
+        resetToken: resetToken,
+      );
+      return right(message);
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
     }
@@ -172,6 +253,22 @@ class AuthRepositoryImpl implements AuthRepository {
       );
       await local.cacheUserAccessToken(token: data.data.token);
       return right(data);
+    } on ServerException catch (error) {
+      return left(ServerFailure.formServerException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> changePassword({
+    required ChangePasswordParams params,
+  }) async {
+    try {
+      final String token = await local.getUserAccessToken();
+      final String message = await authRemoteDatasource.changePassword(
+        params: params,
+        token: token,
+      );
+      return right(message);
     } on ServerException catch (error) {
       return left(ServerFailure.formServerException(error));
     }

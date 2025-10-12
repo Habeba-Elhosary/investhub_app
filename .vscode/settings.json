@@ -1,3 +1,6 @@
 {
-  "cSpell.words": ["maxend"]
+  "cSpell.words": [
+    "maxend"
+  ],
+  "dart.flutterSdkPath": ".fvm/versions/3.35.5"
 }

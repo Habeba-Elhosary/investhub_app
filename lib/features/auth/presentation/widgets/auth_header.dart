@@ -39,7 +39,7 @@ class AuthHeader extends StatelessWidget {
                 ),
               ),
               Image.asset(
-                AppAssets.imagesSplashLogo,
+                AppAssets.logo,
                 height: 30.sp,
                 color: AppColors.primary,
               ),

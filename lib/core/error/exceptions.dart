@@ -11,7 +11,6 @@ class ServerException implements Exception {
   });
 }
 
-
 class TraderAlreadyExistException implements Exception {
   final String message;
   final int id;
@@ -47,8 +46,16 @@ class StatusException implements Exception {
   StatusException({required this.message});
 }
 
-
 class ProductAlreadyExistInCartException implements Exception {
   final String message;
   ProductAlreadyExistInCartException({required this.message});
+}
+
+class OtpVerificationRequiredException implements Exception {
+  final String message;
+  final String otpToken;
+  OtpVerificationRequiredException({
+    required this.message,
+    required this.otpToken,
+  });
 }

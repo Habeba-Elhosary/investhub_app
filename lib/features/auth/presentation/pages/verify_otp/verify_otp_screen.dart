@@ -16,7 +16,15 @@ import '../../../../../../core/constant/values/text_styles.dart';
 import '../../../../../../core/widgets/app_spacer.dart';
 
 class OTPVerficationScreen extends StatefulWidget {
-  const OTPVerficationScreen({super.key});
+  final String? otpToken;
+  final String? phone;
+  final bool isLoginContext;
+  const OTPVerficationScreen({
+    super.key,
+    this.otpToken,
+    this.phone,
+    this.isLoginContext = false,
+  });
 
   @override
   State<OTPVerficationScreen> createState() => _OTPVerficationScreenState();
@@ -96,7 +104,25 @@ class _OTPVerficationScreenState extends State<OTPVerficationScreen> {
                     ),
                     const AppSpacer(heightRatio: 1),
                     BlocProvider(
-                      create: (context) => sl<VerfiyCodeCubit>(),
+                      create: (context) {
+                        final cubit = VerfiyCodeCubit(
+                          verfiyCodeUsecase: sl(),
+                          verifyForgetPasswordOtpUsecase: sl(),
+                          localDataSource: sl(),
+                          context: widget.isLoginContext
+                              ? VerificationContext.login
+                              : VerificationContext.passwordReset,
+                        );
+                        if (widget.otpToken != null) {
+                          Future.microtask(
+                            () => cubit.setOtpToken(widget.otpToken!),
+                          );
+                        }
+                        if (widget.phone != null) {
+                          Future.microtask(() => cubit.setPhone(widget.phone!));
+                        }
+                        return cubit;
+                      },
                       child: Builder(
                         builder: (context) {
                           return BlocBuilder<VerfiyCodeCubit, VerfiyCodeState>(

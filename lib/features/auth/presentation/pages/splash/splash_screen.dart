@@ -2,7 +2,6 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:investhub_app/core/constant/values/app_assets.dart';
-import 'package:investhub_app/core/constant/values/colors.dart';
 import 'package:investhub_app/core/constant/values/text_styles.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/auto_login/auto_login_cubit.dart';
@@ -30,7 +29,7 @@ class SplashScreenState extends State<SplashScreen>
   late Animation<double> _dropAnim;
   late Animation<double> _scaleAnim;
   late Animation<double> _fadeImageAnim;
-  final Color splashColor = AppColors.primary;
+  Color get splashColor => Theme.of(context).primaryColor;
   final double ballSize = 24.0.sp;
   bool _animationFinished = false;
 
@@ -98,6 +97,7 @@ class SplashScreenState extends State<SplashScreen>
     _fadeImageController.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
         _animationFinished = true;
+        await Future.delayed(const Duration(seconds: 1));
         _navigateIfReady();
       }
     });
@@ -134,7 +134,7 @@ class SplashScreenState extends State<SplashScreen>
         _navigateIfReady();
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Stack(
           children: [
             AnimatedBuilder(
@@ -168,14 +168,14 @@ class SplashScreenState extends State<SplashScreen>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      AppAssets.imagesSplashLogo,
+                      AppAssets.logo,
                       fit: BoxFit.scaleDown,
                       width: 250.sp,
                     ),
                     Text(
                       LocaleKeys.app_name.tr(),
                       style: TextStyles.bold24.copyWith(
-                        color: AppColors.white,
+                        color: Theme.of(context).primaryColor,
                         fontStyle: FontStyle.italic,
                         fontSize: 50.sp,
                       ),
@@ -184,7 +184,7 @@ class SplashScreenState extends State<SplashScreen>
                     Text(
                       LocaleKeys.splash_title1.tr(),
                       style: TextStyles.semiBold24.copyWith(
-                        color: AppColors.white,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -192,7 +192,7 @@ class SplashScreenState extends State<SplashScreen>
                     Text(
                       LocaleKeys.splash_title2.tr(),
                       style: TextStyles.regular20.copyWith(
-                        color: AppColors.white,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                       ),
                       textAlign: TextAlign.center,
                     ),

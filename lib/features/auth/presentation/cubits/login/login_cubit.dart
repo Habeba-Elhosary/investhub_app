@@ -3,6 +3,7 @@ import 'package:investhub_app/core/widgets/toast.dart';
 import 'package:investhub_app/features/auth/data/models/auth_response.dart';
 import 'package:investhub_app/features/auth/domain/usecases/login_usecase.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/auto_login/auto_login_cubit.dart';
+import 'package:investhub_app/features/auth/presentation/pages/verify_otp/verify_otp_screen.dart';
 import 'package:investhub_app/features/home/presentation/pages/main_screen.dart';
 import 'package:investhub_app/injection_container.dart';
 import 'package:dartz/dartz.dart';
@@ -22,9 +23,19 @@ class LoginCubit extends Cubit<LoginState> {
       LoginParams(phone: phone, password: password),
     );
     failureOrUser.fold(
-      (Failure faile) {
-        emit(LoginError(message: faile.message));
-        showErrorToast(faile.message);
+      (Failure failure) {
+        if (failure is OtpVerificationRequiredFailure) {
+          appNavigator.push(
+            screen: OTPVerficationScreen(
+              otpToken: failure.otpToken,
+              isLoginContext: true,
+            ),
+          );
+          emit(LoginOtpRequired(otpToken: failure.otpToken));
+        } else {
+          emit(LoginError(message: failure.message));
+          showErrorToast(failure.message);
+        }
       },
       (AuthResponse authResponse) {
         showSucessToast(authResponse.message!);

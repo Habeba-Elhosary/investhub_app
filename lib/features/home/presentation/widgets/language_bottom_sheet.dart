@@ -15,7 +15,7 @@ class LanguageBottomSheet {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
@@ -34,7 +34,7 @@ class LanguageBottomSheet {
                     child: Text(
                       LocaleKeys.profile_change_language.tr(),
                       style: TextStyles.bold20.copyWith(
-                        color: AppColors.primary,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),
@@ -44,7 +44,7 @@ class LanguageBottomSheet {
                     AppAssets.imagesLanguage,
                     width: 100.sp,
                     height: 100.sp,
-                    color: AppColors.primary,
+                    color: Theme.of(context).primaryColor,
                   ),
                   AppSpacer(heightRatio: 1),
                   Row(
@@ -99,44 +99,58 @@ class LanguageBottomSheet {
     required bool isSelected,
     required VoidCallback onTap,
   }) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(8.r),
-            border: Border.all(
-              color: isSelected
-                  ? AppColors.primary
-                  : AppColors.unActiveBorderColor,
+    return Builder(
+      builder: (context) {
+        return Expanded(
+          child: GestureDetector(
+            onTap: onTap,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+              decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(
+                  color: isSelected
+                      ? Theme.of(context).primaryColor
+                      : Theme.of(context).dividerColor,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? AppColors.greyLight.withOpacity(0.2)
+                        : Theme.of(context).shadowColor.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    isSelected
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_unchecked,
+                    color: isSelected
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).dividerColor,
+                  ),
+
+                  AppSpacer(widthRatio: 1.5),
+                  Text(
+                    label,
+                    style: TextStyles.regular16.copyWith(
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                  ),
+                  AppSpacer(widthRatio: 1.5),
+                  Text(flag, style: TextStyle(fontSize: 24)),
+                ],
+              ),
             ),
           ),
-          child: Row(
-            children: [
-              Icon(
-                isSelected
-                    ? Icons.radio_button_checked
-                    : Icons.radio_button_unchecked,
-                color: isSelected
-                    ? AppColors.primary
-                    : AppColors.unActiveBorderColor,
-              ),
-
-              AppSpacer(widthRatio: 1.5),
-              Text(
-                label,
-                style: TextStyles.regular16.copyWith(
-                  color: AppColors.darkPrimary,
-                ),
-              ),
-              AppSpacer(widthRatio: 1.5),
-              Text(flag, style: TextStyle(fontSize: 24)),
-            ],
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

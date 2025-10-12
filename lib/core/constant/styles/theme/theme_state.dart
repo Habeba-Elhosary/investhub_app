@@ -15,10 +15,10 @@ final class LightAppTheme extends ThemeState {
     : super(themeData: AppLightTheme.mainThemeData, primary: AppColors.primary);
 }
 
-// final class DarkAppTheme extends ThemeState {
-//   DarkAppTheme()
-//       : super(
-//           themeData: DarkThemeConfig.mainThemeData,
-//           primary: AppColors.primaryDark,
-//         );
-// }
+final class DarkAppTheme extends ThemeState {
+  DarkAppTheme()
+    : super(
+        themeData: AppDarkTheme.mainThemeData,
+        primary: AppColors.primaryDark,
+      );
+}

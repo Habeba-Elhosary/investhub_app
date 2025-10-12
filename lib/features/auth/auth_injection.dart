@@ -7,20 +7,27 @@ import 'package:investhub_app/features/auth/domain/usecases/create_new_password_
 import 'package:investhub_app/features/auth/domain/usecases/detect_user_by_phone_usecase.dart';
 import 'package:investhub_app/features/auth/domain/usecases/forget_password_usecase.dart';
 import 'package:investhub_app/features/auth/domain/usecases/get_user_profile_usecase.dart';
+import 'package:investhub_app/features/auth/domain/usecases/google_login_usecase.dart';
 import 'package:investhub_app/features/auth/domain/usecases/login_usecase.dart';
 import 'package:investhub_app/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:investhub_app/features/auth/domain/usecases/register_usecase.dart';
 import 'package:investhub_app/features/auth/domain/usecases/send_otp_usecase.dart';
 import 'package:investhub_app/features/auth/domain/usecases/verify_code_usecase.dart';
+import 'package:investhub_app/features/auth/domain/usecases/verify_forget_password_otp_usecase.dart';
+import 'package:investhub_app/features/auth/domain/usecases/reset_password_usecase.dart';
+import 'package:investhub_app/features/auth/domain/usecases/change_password_usecase.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/auto_login/auto_login_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/create_new_password/create_new_password_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/detect_user_by_phone/detect_user_by_phone_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/forget_password/forget_password_cubit.dart';
+import 'package:investhub_app/features/auth/presentation/cubits/google_login/google_login_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/logout/logout_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/register/register_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/send_otp/send_otp_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/verification_code/verification_code_cubit.dart';
+import 'package:investhub_app/features/auth/presentation/cubits/reset_password/reset_password_cubit.dart';
+import 'package:investhub_app/features/auth/presentation/cubits/change_password/change_password_cubit.dart';
 import 'package:investhub_app/injection_container.dart';
 
 void initAuthInjection() async {
@@ -35,12 +42,20 @@ void initAuthInjection() async {
     () => CreateNewPasswordCubit(createNewPasswordUsecase: sl()),
   );
   sl.registerFactory(() => SendOtpCubit(sendOtpUsecase: sl()));
-  sl.registerFactory(() => VerfiyCodeCubit(verfiyCodeUsecase: sl()));
+  sl.registerFactory(
+    () => VerfiyCodeCubit(
+      verfiyCodeUsecase: sl(),
+      verifyForgetPasswordOtpUsecase: sl(),
+      localDataSource: sl(),
+    ),
+  );
+  sl.registerFactory(() => ResetPasswordCubit(resetPasswordUsecase: sl()));
   sl.registerFactory(() => LogoutCubit(logoutUsecase: sl()));
   sl.registerFactory<DetectUserByPhoneCubit>(
     () => DetectUserByPhoneCubit(detectUserByPhoneUsecase: sl()),
   );
-
+  sl.registerFactory(() => ChangePasswordCubit(changePasswordUsecase: sl()));
+  sl.registerFactory(() => GoogleLoginCubit(googleLoginUsecase: sl()));
   // usecase
   sl.registerLazySingleton(() => LoginUsecase(authRepository: sl()));
   sl.registerLazySingleton(() => RegisterUsecase(authRepository: sl()));
@@ -51,11 +66,17 @@ void initAuthInjection() async {
   sl.registerLazySingleton(() => GetUserProfileUsecase(authRepository: sl()));
   sl.registerLazySingleton(() => SendOtpUsecase(authRepository: sl()));
   sl.registerLazySingleton(() => VerifyCodeUsecase(authRepository: sl()));
+  sl.registerLazySingleton(
+    () => VerifyForgetPasswordOtpUsecase(authRepository: sl()),
+  );
+  sl.registerLazySingleton(() => ResetPasswordUsecase(authRepository: sl()));
   sl.registerLazySingleton(() => LogoutUsecase(authRepository: sl()));
   sl.registerLazySingleton(() => AutoLoginUsecase(authRepository: sl()));
   sl.registerLazySingleton<DetectUserByPhoneUsecase>(
     () => DetectUserByPhoneUsecase(repository: sl()),
   );
+  sl.registerLazySingleton(() => ChangePasswordUsecase(repository: sl()));
+  sl.registerLazySingleton(() => GoogleLoginUsecase(authRepository: sl()));
   // repository
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(

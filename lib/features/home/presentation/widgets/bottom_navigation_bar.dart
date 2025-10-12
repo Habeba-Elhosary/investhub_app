@@ -20,10 +20,12 @@ class BottomNavBar extends StatelessWidget {
       builder: (context, currentIndex) {
         return Container(
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: Theme.of(context).cardColor,
             boxShadow: [
               BoxShadow(
-                color: AppColors.primaryLight,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? AppColors.greyLight.withOpacity(0.3)
+                    : Theme.of(context).primaryColor.withOpacity(0.1),
                 blurRadius: 50,
                 spreadRadius: 0,
                 offset: const Offset(0, -5),
@@ -42,8 +44,10 @@ class BottomNavBar extends StatelessWidget {
             onTap: (index) async {
               context.read<BottomNavigationCubit>().changeIndex(index);
             },
-            selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.greyDark,
+            selectedItemColor: Theme.of(context).primaryColor,
+            unselectedItemColor: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.color?.withOpacity(0.6),
             showUnselectedLabels: false,
             showSelectedLabels: false,
             items: List.generate(items.length, (index) {
@@ -57,15 +61,21 @@ class BottomNavBar extends StatelessWidget {
                       items[index].icon,
                       width: 25.sp,
                       height: 25.sp,
-                      color: isActive ? AppColors.primary : AppColors.greyDark,
+                      color: isActive
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.color?.withOpacity(0.6),
                     ),
                     AppSpacer(widthRatio: 0.5),
                     Text(
                       items[index].title.tr(),
                       style: TextStyles.semiBold16.copyWith(
                         color: isActive
-                            ? AppColors.primary
-                            : AppColors.greyDark,
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.color?.withOpacity(0.6),
                       ),
                     ),
                   ],

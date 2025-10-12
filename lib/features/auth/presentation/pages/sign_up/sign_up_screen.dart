@@ -15,18 +15,21 @@ import 'package:investhub_app/features/auth/presentation/widgets/auth_header.dar
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_one.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_three.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/register_form_two.dart';
+import 'package:investhub_app/features/general/presentation/cubits/get_banks/get_banks_cubit.dart';
 import 'package:investhub_app/features/general/presentation/cubits/registration_questions/registration_questions_cubit.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
 
 class SignUpScreen extends StatelessWidget {
-  final bool isSignUp;
-  const SignUpScreen({super.key, required this.isSignUp});
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<RegisterCubit>(
-      create: (context) => sl<RegisterCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RegisterCubit>(create: (context) => sl<RegisterCubit>()),
+        BlocProvider<GetBanksCubit>(create: (context) => sl<GetBanksCubit>()),
+      ],
       child: Scaffold(
         appBar: AppBar(),
         body: SafeArea(
@@ -40,17 +43,10 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    if (isSignUp) ...[
-                      AuthHeader(
-                        title: LocaleKeys.auth_create_account.tr(),
-                        subtitle: LocaleKeys.auth_create_account_hint.tr(),
-                      ),
-                    ] else ...[
-                      AuthHeader(
-                        title: LocaleKeys.profile_edit_profile.tr(),
-                        subtitle: LocaleKeys.edit_profile_desc.tr(),
-                      ),
-                    ],
+                    AuthHeader(
+                      title: LocaleKeys.auth_create_account.tr(),
+                      subtitle: LocaleKeys.auth_create_account_hint.tr(),
+                    ),
                     const AppSpacer(heightRatio: 1.5),
                     CustomStepper(
                       currentStep: registerCubit.currentStep,

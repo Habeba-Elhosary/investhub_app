@@ -3,8 +3,7 @@ import 'package:investhub_app/core/util/validator.dart';
 import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/core/widgets/password_text_form_field.dart';
 import 'package:investhub_app/core/widgets/spinner_loading.dart';
-import 'package:investhub_app/features/auth/domain/usecases/create_new_password_usecase.dart';
-import 'package:investhub_app/features/auth/presentation/cubits/create_new_password/create_new_password_cubit.dart';
+import 'package:investhub_app/features/auth/presentation/cubits/reset_password/reset_password_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/widgets/auth_header.dart';
 import 'package:investhub_app/generated/LocaleKeys.g.dart';
 import 'package:investhub_app/injection_container.dart';
@@ -13,7 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
+  final String? resetToken;
+  final String? phone;
+
+  const ResetPasswordScreen({super.key, this.resetToken, this.phone});
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
@@ -75,34 +77,54 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                   const AppSpacer(heightRatio: 1.5),
                   BlocProvider(
-                    create: (context) => sl<CreateNewPasswordCubit>(),
+                    create: (context) => sl<ResetPasswordCubit>(),
                     child: Builder(
                       builder: (context) {
                         return BlocBuilder<
-                          CreateNewPasswordCubit,
-                          CreateNewPasswordState
+                          ResetPasswordCubit,
+                          ResetPasswordState
                         >(
                           builder: (context, state) {
                             return Visibility(
-                              visible: state is! CreateNewPasswordLoading,
+                              visible: state is! ResetPasswordLoading,
                               replacement: const Center(
                                 child: SpinnerLoading(),
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
+                                  print('ResetPasswordScreen: Button pressed');
+                                  print(
+                                    'ResetPasswordScreen: ResetToken: ${widget.resetToken}',
+                                  );
+                                  print(
+                                    'ResetPasswordScreen: Phone: ${widget.phone}',
+                                  );
+                                  print(
+                                    'ResetPasswordScreen: Password: ${passwordController.text}',
+                                  );
+
                                   if (_formKey.currentState!.validate()) {
-                                    context
-                                        .read<CreateNewPasswordCubit>()
-                                        .createNewPasswordEvent(
-                                          createNewPasswordParams:
-                                              CreateNewPasswordParams(
-                                                password:
-                                                    passwordController.text,
-                                                confirmationPassword:
-                                                    confirmPasswordController
-                                                        .text,
-                                              ),
-                                        );
+                                    if (widget.resetToken != null &&
+                                        widget.phone != null) {
+                                      print(
+                                        'ResetPasswordScreen: Calling resetPasswordEvent',
+                                      );
+                                      context
+                                          .read<ResetPasswordCubit>()
+                                          .resetPasswordEvent(
+                                            phone: widget.phone!,
+                                            password: passwordController.text,
+                                            resetToken: widget.resetToken!,
+                                          );
+                                    } else {
+                                      print(
+                                        'ResetPasswordScreen: Missing resetToken or phone',
+                                      );
+                                    }
+                                  } else {
+                                    print(
+                                      'ResetPasswordScreen: Form validation failed',
+                                    );
                                   }
                                 },
                                 child: Text(LocaleKeys.confirm.tr()),

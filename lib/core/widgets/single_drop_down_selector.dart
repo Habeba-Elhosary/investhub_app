@@ -122,21 +122,44 @@ class _CoreSingleSelectorDropdownState<
             value: value,
             validator: (SelectorItem? value) => widget.validator(value),
             decoration: InputDecoration(
-              label: Text(widget.label),
+              filled: true,
+              fillColor: Theme.of(context).cardColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Theme.of(context).dividerColor),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Theme.of(context).dividerColor),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Theme.of(context).primaryColor),
+              ),
+              label: Text(
+                widget.label,
+                style: TextStyles.regular16.copyWith(
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                ),
+              ),
               suffixIcon: GestureDetector(
                 onTap: () => widget.initState(),
-                child: const SizedBox(
+                child: SizedBox(
                   height: 24,
                   width: 24,
                   child: FittedBox(
                     child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Icon(Icons.refresh),
+                      padding: const EdgeInsets.all(20),
+                      child: Icon(
+                        Icons.refresh,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
+            dropdownColor: Theme.of(context).cardColor,
             onChanged: (Object? value) {},
             items: const <DropdownMenuItem<Never>>[],
           );
@@ -145,7 +168,26 @@ class _CoreSingleSelectorDropdownState<
           return DropdownButtonFormField<SelectorItem>(
             validator: widget.validator,
             decoration: InputDecoration(
-              label: Text(widget.label),
+              filled: true,
+              fillColor: Theme.of(context).cardColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Theme.of(context).dividerColor),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Theme.of(context).dividerColor),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Theme.of(context).primaryColor),
+              ),
+              label: Text(
+                widget.label,
+                style: TextStyles.regular16.copyWith(
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                ),
+              ),
               suffixIcon: const SizedBox(
                 height: 24,
                 width: 24,
@@ -157,13 +199,36 @@ class _CoreSingleSelectorDropdownState<
                 ),
               ),
             ),
+            dropdownColor: Theme.of(context).cardColor,
             onChanged: (Object? value) {},
             items: const <DropdownMenuItem<Never>>[],
           );
         }
         return DropdownButtonFormField<SelectorItem>(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(label: Text(widget.label)),
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Theme.of(context).cardColor,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Theme.of(context).dividerColor),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Theme.of(context).dividerColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+            ),
+            label: Text(
+              widget.label,
+              style: TextStyles.regular16.copyWith(
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+              ),
+            ),
+          ),
+          dropdownColor: Theme.of(context).cardColor,
           value: value,
           validator: widget.validator,
           onChanged: (SelectorItem? value) {
@@ -172,7 +237,16 @@ class _CoreSingleSelectorDropdownState<
           },
           hint: Text(
             widget.hintText ?? '',
-            style: TextStyles.regular16.copyWith(fontFamily: AppFonts.tajawal),
+            style: TextStyles.regular16.copyWith(
+              fontFamily: AppFonts.tajawal,
+              color: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.color?.withOpacity(0.6),
+            ),
+          ),
+          style: TextStyles.regular16.copyWith(
+            fontFamily: AppFonts.tajawal,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
           ),
           items: widget.options
               .map(
@@ -182,7 +256,7 @@ class _CoreSingleSelectorDropdownState<
                     e.name,
                     style: TextStyles.regular16.copyWith(
                       fontFamily: AppFonts.tajawal,
-                      color: Colors.black,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                     ),
                   ),
                 ),

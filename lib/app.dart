@@ -32,7 +32,7 @@ class _InvestHubAppState extends State<InvestHubApp> {
 
   Future<void> _initializeScreenshotProtection() async {
     try {
-      await NoScreenshot.instance.screenshotOff();
+      await NoScreenshot.instance.screenshotOn();
     } catch (e) {
       log('NoScreenshot error: $e');
     }
@@ -61,6 +61,7 @@ class _InvestHubAppState extends State<InvestHubApp> {
                 supportedLocales: context.supportedLocales,
                 localizationsDelegates: context.localizationDelegates,
                 navigatorKey: sl<AppNavigator>().navigatorKey,
+                debugShowCheckedModeBanner: false,
                 home: SplashScreen(),
               );
             },

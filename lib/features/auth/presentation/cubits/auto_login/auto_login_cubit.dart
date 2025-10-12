@@ -24,12 +24,8 @@ class AutoLoginCubit extends Cubit<AutoLoginState> {
       },
       (User user) async {
         _user = user;
-        if (user.id != null) {
-          emit(const AutoLoginHasUser());
-        } else {
-          emitSeenIntro();
-        }
-      },
+        emit(const AutoLoginHasUser());
+            },
     );
   }
 

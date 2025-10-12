@@ -22,10 +22,17 @@ class AppAssets {
 
   static const String imagesSpinnerLoading = "assets/images/spinner_loading.gif";
 
-  static const String imagesSplashLogo = "assets/images/splash_logo.png";
+  static const String logo = "assets/images/logo.png";
 
   static const String imagesUser = "assets/images/user.png";
 
   static const String imagesWrite = "assets/images/write.png";
+
+
+  static const String halal = "assets/images/halal.png";
+  static const String nonHalal = "assets/images/not_halal.png";
+
+
+
 }
 

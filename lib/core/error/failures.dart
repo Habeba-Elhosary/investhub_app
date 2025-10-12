@@ -73,3 +73,11 @@ class UnauthorizedFailure extends Failure {
 class ProductAlreadyExistInCartFailure extends Failure {
   const ProductAlreadyExistInCartFailure({required super.message});
 }
+
+class OtpVerificationRequiredFailure extends Failure {
+  final String otpToken;
+  const OtpVerificationRequiredFailure({
+    required super.message,
+    required this.otpToken,
+  });
+}

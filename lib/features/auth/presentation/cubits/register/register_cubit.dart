@@ -125,7 +125,9 @@ class RegisterCubit extends Cubit<RegisterState> {
       },
       (AuthResponse authResponse) {
         if (authResponse.data.otpVerified == false) {
-          appNavigator.pushReplacement(screen: const OTPVerficationScreen());
+          appNavigator.pushReplacement(
+            screen: const OTPVerficationScreen(isLoginContext: true),
+          );
         } else {
           appNavigator.pushReplacement(screen: const MainScreen());
         }
@@ -135,7 +137,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   @override
-
   Future<void> close() {
     nameController.dispose();
     phoneController.dispose();

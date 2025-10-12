@@ -34,4 +34,9 @@ class AppColors {
   static const Color rejectBorder = Color(0xFFFFD2D1);
   static const Color rejectBackground = Color(0xFFFEE9E7);
   static Color scaffoldBackgroundColor = FlavorConfig.instance.color;
+
+  static const Color primaryDark = Color(0xFF1E88E5);
+  static const Color darkBackground = Color(0xFF121212);
+  static const Color darkCard = Color(0xFF1E1E1E);
+  static const Color darkInput = Color(0xFF2C2C2C);
 }

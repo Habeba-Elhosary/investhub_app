@@ -6,8 +6,8 @@ void main() {
   FlavorConfig(
     color: Colors.white,
     name: 'PROD',
-    variables: <String, dynamic>{
-      'baseUrl': '',
+   variables: <String, dynamic>{
+      'baseUrl': 'https://basierah.com/api/v1/mobile',
     },
   );
   runner.main();

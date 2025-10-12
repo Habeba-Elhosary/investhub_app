@@ -20,6 +20,8 @@ abstract class  LocaleKeys {
   static const validationMessages_enter_correct_name = 'validationMessages.enter_correct_name';
   static const validationMessages_error_email_regex = 'validationMessages.error_email_regex';
   static const validationMessages_error_password_validation = 'validationMessages.error_password_validation';
+  static const validationMessages_error_password_capital_letter = 'validationMessages.error_password_capital_letter';
+  static const validationMessages_error_password_special_character = 'validationMessages.error_password_special_character';
   static const validationMessages_error_wrong_password_confirm = 'validationMessages.error_wrong_password_confirm';
   static const validationMessages_error_wrong_input = 'validationMessages.error_wrong_input';
   static const validationMessages_invalid_phone = 'validationMessages.invalid_phone';
@@ -99,6 +101,7 @@ abstract class  LocaleKeys {
   static const profile_change_language = 'profile.change_language';
   static const profile_change_theme = 'profile.change_theme';
   static const profile_about_app = 'profile.about_app';
+  static const profile_about_us = 'profile.about_us';
   static const profile_privacy_policy = 'profile.privacy_policy';
   static const profile_log_out = 'profile.log_out';
   static const profile_log_out_message = 'profile.log_out_message';
@@ -132,5 +135,23 @@ abstract class  LocaleKeys {
   static const new_password = 'new_password';
   static const confirm_new_password = 'confirm_new_password';
   static const more_than_one_person = 'more_than_one_person';
+  static const current_price = 'current_price';
+  static const entry_price = 'entry_price';
+  static const target_price = 'target_price';
+  static const about_opportunity = 'about_opportunity';
+  static const halal = 'halal';
+  static const expected_return = 'expected_return';
+  static const currently_subscribed = 'currently_subscribed';
+  static const error_loading_data = 'error_loading_data';
+  static const error_loading_more = 'error_loading_more';
+  static const arabic = 'arabic';
+  static const english = 'english';
+  static const email_placeholder = 'email_placeholder';
+  static const phone_placeholder = 'phone_placeholder';
+  static const about_app_content = 'about_app_content';
+  static const about_us_content = 'about_us_content';
+  static const most_popular = 'most_popular';
+  static const subscription_required = 'subscription_required';
+  static const subscription_required_message = 'subscription_required_message';
 
 }

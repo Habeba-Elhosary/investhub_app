@@ -45,7 +45,7 @@ class RegisterFormOne extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               suffixIcon: Icon(Icons.email_outlined),
-              hintText: 'example@gmail.com',
+              hintText: LocaleKeys.email_placeholder.tr(),
             ),
           ),
           AppSpacer(heightRatio: 0.7),
@@ -60,7 +60,7 @@ class RegisterFormOne extends StatelessWidget {
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
               suffixIcon: Icon(Icons.phone_outlined),
-              hintText: '05XXXXXXXX',
+              hintText: LocaleKeys.phone_placeholder.tr(),
             ),
           ),
           AppSpacer(heightRatio: 0.7),
@@ -106,6 +106,7 @@ class RegisterFormOne extends StatelessWidget {
                 initialDate: DateTime.now(),
                 firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
+                locale: const Locale('en',),
               );
               if (pickedDate != null) {
                 registerCubit.setBirthDate(

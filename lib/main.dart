@@ -1,5 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:investhub_app/core/widgets/restart_widget.dart';
-import 'package:investhub_app/generated/codegen_loader.g.dart';
+import 'package:investhub_app/firebase_options.dart';
 import 'package:investhub_app/injection_container.dart';
 import 'package:investhub_app/app.dart';
 import 'package:investhub_app/core/constant/bloc_observer.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   await ServiceLocator.init();
   SystemChrome.setPreferredOrientations(<DeviceOrientation>[
@@ -29,7 +31,6 @@ void main() async {
       supportedLocales: [Locale('en'), Locale('ar')],
       path: 'assets/lang',
       fallbackLocale: const Locale('en'),
-      assetLoader: const CodegenLoader(),
       child: RestartWidget(child: InvestHubApp()),
     ),
   );

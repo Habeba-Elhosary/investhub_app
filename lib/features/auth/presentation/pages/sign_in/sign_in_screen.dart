@@ -9,6 +9,7 @@ import 'package:investhub_app/core/widgets/app_spacer.dart';
 import 'package:investhub_app/core/widgets/password_text_form_field.dart';
 import 'package:investhub_app/core/widgets/spinner_loading.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/detect_user_by_phone/detect_user_by_phone_cubit.dart';
+import 'package:investhub_app/features/auth/presentation/cubits/google_login/google_login_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:investhub_app/features/auth/presentation/pages/create_new_password/create_new_password_screen.dart';
 import 'package:investhub_app/features/auth/presentation/pages/sign_up/sign_up_screen.dart';
@@ -54,8 +55,15 @@ class _SignInScreenState extends State<SignInScreen> {
       appBar: AppBar(),
       body: Padding(
         padding: SizeConfig.paddingSymmetric,
-        child: BlocProvider<DetectUserByPhoneCubit>(
-          create: (context) => sl<DetectUserByPhoneCubit>(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<DetectUserByPhoneCubit>(
+              create: (context) => sl<DetectUserByPhoneCubit>(),
+            ),
+            BlocProvider<GoogleLoginCubit>(
+              create: (context) => sl<GoogleLoginCubit>(),
+            ),
+          ],
           child: Builder(
             builder: (context) {
               return BlocBuilder<
@@ -77,6 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           const AppSpacer(heightRatio: 1.5),
                           TextFormField(
                             controller: phoneController,
+                            // maxLength: 20,
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (String? value) =>
@@ -178,27 +187,43 @@ class _SignInScreenState extends State<SignInScreen> {
                             ],
                           ),
                           const AppSpacer(heightRatio: 1),
-                          OutlinedButton(
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  AppAssets.imagesGoogle,
-                                  width: 25.sp,
-                                  height: 25.sp,
+                          BlocConsumer<GoogleLoginCubit, GoogleLoginState>(
+                            listener: (context, state) {},
+                            builder: (context, state) => Visibility(
+                              visible:
+                                  detectUserState
+                                      is! DetectUserByPhoneLoading &&
+                                  state is! GoogleLoginLoading,
+                              replacement: const Center(
+                                child: SpinnerLoading(),
+                              ),
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  context
+                                      .read<GoogleLoginCubit>()
+                                      .googleLoginEvent();
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      AppAssets.imagesGoogle,
+                                      width: 25.sp,
+                                      height: 25.sp,
+                                    ),
+                                    AppSpacer(widthRatio: 1),
+                                    Text(
+                                      LocaleKeys.auth_signin_with_google.tr(),
+                                    ),
+                                  ],
                                 ),
-                                AppSpacer(widthRatio: 1),
-                                Text(LocaleKeys.auth_signin_with_google.tr()),
-                              ],
+                              ),
                             ),
                           ),
                           const AppSpacer(heightRatio: 1.5),
                           GestureDetector(
                             onTap: () {
-                              appNavigator.push(
-                                screen: SignUpScreen(isSignUp: true),
-                              );
+                              appNavigator.push(screen: SignUpScreen());
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

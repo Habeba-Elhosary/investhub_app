@@ -36,8 +36,8 @@ class UserData {
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(
-      accessToken: json["token"],
-      user: User.fromJson(json["user"]),
+      accessToken: json["token"] ?? '',
+      user: User.fromJson(json["user"] ?? {}),
     );
   }
 
@@ -63,7 +63,7 @@ class User {
   final String annualIncome;
   final String totalSavings;
   final String bank;
-  final bool isActive;
+  final bool isActive, isSubscribed;
   final String otpToken;
   final bool otpVerified;
   final String token;
@@ -83,6 +83,7 @@ class User {
     required this.totalSavings,
     required this.bank,
     required this.isActive,
+    required this.isSubscribed,
     required this.otpToken,
     required this.otpVerified,
     required this.token,
@@ -90,23 +91,27 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["id"],
-    name: json["name"],
-    email: json["email"],
-    phone: json["phone"],
-    nationalId: json["national_id"],
-    dateOfBirth: DateTime.parse(json["date_of_birth"]),
-    maritalStatus: json["marital_status"],
-    familyMembersCount: json["family_members_count"],
-    educationLevel: json["education_level"],
-    annualIncome: json["annual_income"],
-    totalSavings: json["total_savings"],
-    bank: json["bank"],
-    isActive: json["is_active"],
-    otpToken: json["otp_token"],
-    otpVerified: json["otp_verified"],
-    token: json["token"],
-    createdAt: DateTime.parse(json["created_at"]),
+    id: json["id"] ?? 0,
+    name: json["name"] ?? '',
+    email: json["email"] ?? '',
+    phone: json["phone"] ?? '',
+    nationalId: json["national_id"] ?? '',
+    dateOfBirth: DateTime.parse(
+      json["date_of_birth"] ?? DateTime.now().toIso8601String(),
+    ),
+    maritalStatus: json["marital_status"] ?? '',
+    familyMembersCount:
+        int.tryParse(json["family_members_count"]?.toString() ?? '0') ?? 0,
+    educationLevel: json["education_level"] ?? '',
+    annualIncome: json["annual_income"] ?? '',
+    totalSavings: json["total_savings"] ?? '',
+    bank: json["bank"] ?? '',
+    isActive: json["is_active"] ?? false,
+    isSubscribed: json["is_subscribed"] ?? false,
+    otpToken: json["otp_token"] ?? '',
+    otpVerified: json["otp_verified"] ?? false,
+    token: json["token"] ?? '',
+    createdAt: DateTime.tryParse(json["created_at"] ?? '') ?? DateTime.now(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -124,6 +129,7 @@ class User {
     "total_savings": totalSavings,
     "bank": bank,
     "is_active": isActive,
+    "is_subscribed": isSubscribed,
     "otp_token": otpToken,
     "otp_verified": otpVerified,
     "token": token,
@@ -131,4 +137,46 @@ class User {
   };
 
   String toRawJson() => json.encode(toJson());
+
+  User copyWith({
+    int? id,
+    String? name,
+    String? email,
+    String? phone,
+    String? nationalId,
+    DateTime? dateOfBirth,
+    String? maritalStatus,
+    int? familyMembersCount,
+    String? educationLevel,
+    String? annualIncome,
+    String? totalSavings,
+    String? bank,
+    bool? isActive,
+    bool? isSubscribed,
+    String? otpToken,
+    bool? otpVerified,
+    String? token,
+    DateTime? createdAt,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      nationalId: nationalId ?? this.nationalId,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      maritalStatus: maritalStatus ?? this.maritalStatus,
+      familyMembersCount: familyMembersCount ?? this.familyMembersCount,
+      educationLevel: educationLevel ?? this.educationLevel,
+      annualIncome: annualIncome ?? this.annualIncome,
+      totalSavings: totalSavings ?? this.totalSavings,
+      bank: bank ?? this.bank,
+      isActive: isActive ?? this.isActive,
+      isSubscribed: isSubscribed ?? this.isSubscribed,
+      otpToken: otpToken ?? this.otpToken,
+      otpVerified: otpVerified ?? this.otpVerified,
+      token: token ?? this.token,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }

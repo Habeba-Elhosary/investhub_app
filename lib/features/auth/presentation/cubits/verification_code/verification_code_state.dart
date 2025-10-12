@@ -17,4 +17,11 @@ final class VerfiyCodeError extends VerfiyCodeState {
   const VerfiyCodeError({required this.message});
 }
 
-final class VerfiyCodeSuccess extends VerfiyCodeState {}
+final class VerfiyCodeSuccess extends VerfiyCodeState {
+  final String message;
+
+  const VerfiyCodeSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
