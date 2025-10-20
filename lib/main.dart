@@ -30,7 +30,8 @@ void main() async {
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
       path: 'assets/lang',
-      fallbackLocale: const Locale('en'),
+      fallbackLocale: const Locale('ar'),
+      startLocale: const Locale('ar'),
       child: RestartWidget(child: InvestHubApp()),
     ),
   );
