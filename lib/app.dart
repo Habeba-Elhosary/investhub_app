@@ -32,7 +32,7 @@ class _InvestHubAppState extends State<InvestHubApp> {
 
   Future<void> _initializeScreenshotProtection() async {
     try {
-      await NoScreenshot.instance.screenshotOn();
+      await NoScreenshot.instance.screenshotOff();
     } catch (e) {
       log('NoScreenshot error: $e');
     }

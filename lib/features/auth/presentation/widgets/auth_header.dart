@@ -28,7 +28,7 @@ class AuthHeader extends StatelessWidget {
         if (showlogo) ...[
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 LocaleKeys.app_name.tr(),
@@ -40,7 +40,7 @@ class AuthHeader extends StatelessWidget {
               ),
               Image.asset(
                 AppAssets.logo,
-                height: 30.sp,
+                height: 40.sp,
                 color: AppColors.primary,
               ),
             ],
