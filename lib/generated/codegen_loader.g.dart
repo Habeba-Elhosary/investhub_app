@@ -1,4 +1,20 @@
-{
+// DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
+
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, constant_identifier_names
+
+import 'dart:ui';
+
+import 'package:easy_localization/easy_localization.dart' show AssetLoader;
+
+class CodegenLoader extends AssetLoader{
+  const CodegenLoader();
+
+  @override
+  Future<Map<String, dynamic>?> load(String path, Locale locale) {
+    return Future.value(mapLocales[locale.toString()]);
+  }
+
+  static const Map<String,dynamic> _ar = {
   "app_name": "الحوت",
   "errorsMessage": {
     "no_internet": "عفوا يرجي التحقق من الاتصال بالانترنت",
@@ -160,4 +176,168 @@
   "most_popular": "الأكثر شعبية",
   "subscription_required": "اشتراك مطلوب",
   "subscription_required_message": "تحتاج إلى الاشتراك لعرض فرص الاستثمار. يرجى اختيار باقة اشتراك للمتابعة."
+};
+static const Map<String,dynamic> _en = {
+  "app_name": "الحوت",
+  "errorsMessage": {
+    "no_internet": "Please check your internet connection.",
+    "server_500": "Something went wrong... Please try again.",
+    "check_internet_connection": "Please check your internet connection and try again.",
+    "connection_timed_out_please_check_your_internet_speed": "Connection timed out... Please check your internet and try again.",
+    "the_order_has_been_cancelled": "The order has been cancelled. Please try again.",
+    "there_was_an_error_responding": "There was a response error... Please try again later.",
+    "please_try_again": "Please check your internet connection.",
+    "something_went_wrong": "Something went wrong... Please try again."
+  },
+  "validationMessages": {
+    "error_filed_required": "This field is required.",
+    "name_short_input": "The name must be more than 4 characters.",
+    "name_must_trio": "The name must consist of at least three parts.",
+    "short_address": "The address is too short.",
+    "enter_correct_name": "Please enter a valid name.",
+    "error_email_regex": "Please enter a valid email address.",
+    "error_password_validation": "The password must be at least 8 characters.",
+    "error_password_capital_letter": "The password must contain at least one capital letter.",
+    "error_password_special_character": "The password must contain at least one special character (@, #, ?, !, etc.).",
+    "error_wrong_password_confirm": "Passwords do not match.",
+    "error_wrong_input": "Please enter a valid number.",
+    "invalid_phone": "Invalid phone number.",
+    "error_must_be_positive": "Please enter a positive number."
+  },
+  "durationUnits": {
+    "minute": "Minute",
+    "hour": "Hour",
+    "day": "Day",
+    "week": "Week",
+    "month": "Month",
+    "year": "Year"
+  },
+  "splash": {
+    "title1": "Smart Investment App",
+    "title2": "Your gateway to financial success, invest wisely and confidently"
+  },
+  "auth": {
+    "please_answer_all_questions": "Please answer all questions",
+    "personal_info": "Personal Info",
+    "financial_info": "Financial Info",
+    "risk_info": "Risk knowledge assessment",
+    "name": "Name",
+    "full_name": "Full Name",
+    "enter_full_name": "Enter your full name",
+    "email": "Email",
+    "enter_password": "Enter your password",
+    "national_id": "National ID",
+    "enter_national_id": "Enter your national ID",
+    "birth_date": "Birth Date",
+    "select_birth_date": "Select your birth date",
+    "or": "OR",
+    "marital_status": "Marital Status",
+    "select_marital_status": "Select your marital status",
+    "family_number": "Number of family members",
+    "education_level": "Educational level",
+    "select_education_level": "Select your educational level",
+    "yearly_income": "Annual income",
+    "enter_yearly_income": "Enter your annual income",
+    "total_savings": "Total savings",
+    "enter_total_savings": "Enter your total savings",
+    "used_bank": "The bank you deal with",
+    "select_bank": "Select the bank you deal with",
+    "create_account_hint": "Create your account now and enjoy a unique experience",
+    "dont_have_account": "Don't have an account ?",
+    "signup": "Sign Up",
+    "signin_with_google": "Sign in with Google",
+    "signin_welcome_message": "Welcome!",
+    "signin_welcome_sub_message": "We hope your experience with us is enjoyable and useful.",
+    "create_password": "Create Password",
+    "enter_your_phone_number_to_reset_password": "Please enter your phone number below to reset your password.",
+    "phone_number": "Phone Number",
+    "reset_password": "Reset Password",
+    "password_validation": "Password must be at least 6 characters.",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "forgot_password": "Forgot Password?",
+    "signin": "Sign In",
+    "no_account": "Don't have an account?",
+    "create_new_account": "Create New Account",
+    "create_account_message": "Create your account and get started!",
+    "create_account_sub_message": "Register now to enjoy a smooth shopping experience.",
+    "user_name": "Username",
+    "otp_sent_successfully": "OTP sent successfully",
+    "create_account": "Create Account",
+    "do_you_have_account": "Already have an account?",
+    "go_to_signin": "Go to Sign In",
+    "confirm_identity": "Confirm Identity",
+    "confirm_identity_message": "To verify your identity, enter the 4-digit verification code.",
+    "didnt_receive_code": "Didn't receive the code?",
+    "resend": "Resend",
+    "password_changed_successfully": "Password changed successfully"
+  },
+  "home": {
+    "oppurtunities": "Opportunities",
+    "subscriptions": "Packages",
+    "profile": "Profile"
+  },
+  "profile": {
+    "edit_profile": "Edit my profile",
+    "change_password": "Change Password",
+    "change_language": "Change Language",
+    "change_theme": "Change Theme",
+    "about_app": "About App",
+    "about_us": "About Us",
+    "privacy_policy": "Privacy Policy",
+    "log_out": "Log Out",
+    "log_out_message": "Are you sure you want to log out ?"
+  },
+  "marital_status": {
+    "single": "Single",
+    "married": "Married",
+    "divorced": "Divorced",
+    "widowed": "Widowed"
+  },
+  "educational_status": {
+    "high_school": "High School",
+    "diploma": "Diploma",
+    "bachelor": "Bachelor",
+    "master": "Master",
+    "phd": "PhD",
+    "others": "Other"
+  },
+  "send": "Send",
+  "confirm": "Confirm",
+  "more": "More",
+  "pound": "EGP",
+  "yes": "Yes",
+  "no": "No",
+  "retry": "Retry",
+  "the_previous": "Previous",
+  "the_next": "Next",
+  "subscribe_now": "Subscribe Now",
+  "opportunity_details": "Opportunity Details",
+  "opportunity_description": "Opportunity Description",
+  "edit_profile_desc": "Edit your profile now and click Save to update your profile.",
+  "current_password": "Current Password",
+  "new_password": "New Password",
+  "confirm_new_password": "Confirm New Password",
+  "more_than_one_person": "The number of people cannot be less than 1",
+  "current_price": "Current Price",
+  "entry_price": "Entry Price",
+  "target_price": "Target Price",
+  "about_opportunity": "About the Opportunity",
+  "halal": "Halal",
+  "expected_return": "Expected Return",
+  "currently_subscribed": "Currently Subscribed",
+  "error_loading_data": "Error loading data",
+  "error_loading_more": "Error loading more",
+  "arabic": "العربية",
+  "english": "English",
+  "email_placeholder": "example@gmail.com",
+  "phone_placeholder": "05XXXXXXXX",
+  "about_app_content": "At InvestHub, we believe that knowledge is the key to making better decisions, and every investor deserves to get information in a simplified, transparent, and reliable way. That's why we designed this app to be an integrated platform that aims to enable users to understand financial markets easily, identify promising investment opportunities, and follow the movement of stocks and companies moment by moment.\n\nThe app provides a smooth and intuitive experience that allows you to view the latest financial data and analyses from trusted sources, supported by modern technologies that ensure the accuracy of information and speed of access to you. We continuously work on developing tools that help you analyze the financial performance of companies, compare investment opportunities, and set goals that suit your needs.\n\nOur role is not limited to providing you with numbers only, but we also strive to simplify complex economic and investment concepts and turn them into clear and easy-to-understand content so that any user, whether a beginner or a professional, can benefit to the fullest.\n\nOur vision is to become the trusted partner of every investor in their financial journey, as we aspire to be the first platform that users rely on to make their decisions with confidence, supported by knowledge, experience, and transparency. Our message is to make investment accessible to everyone, and open the doors of opportunities for everyone who seeks to achieve financial independence and build a more stable and prosperous future.",
+  "about_us_content": "About the Team\n\nIn the fast-paced world of investment, Basira comes to give you confidence in every financial decision.\nBacked by a team with CFA and CMT certifications, combining deep fundamental analysis with precise technical analysis, and insider information from companies listed in financial markets, we provide you with thoughtful insights resulting from years of experience working in financial markets.\n\nWe don't just provide numbers, we tell the story of every stock:\nFrom its financial background, to its price behavior, to its future opportunities—all in clear language, elegant interface, and an experience designed for the smart investor.\n\nWhat distinguishes us?\n\n• Professional analysis from globally certified experts.\n• Thoughtful ideas based on advanced financial and technical models.\n• Rich content with data, easy to understand, and constantly updated.\n\nWhether you're a beginner investor or a professional looking for depth, Basira is your smart partner in the market journey.",
+  "most_popular": "Most Popular",
+  "subscription_required": "Subscription Required",
+  "subscription_required_message": "You need to subscribe to view investment opportunities. Please choose a subscription package to continue."
+};
+static const Map<String,dynamic> _lang = {};
+static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "lang": _lang};
 }

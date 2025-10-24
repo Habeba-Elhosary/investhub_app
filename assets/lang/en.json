@@ -1,5 +1,5 @@
 {
-  "app_name": "بصيرة",
+  "app_name": "الحوت",
   "errorsMessage": {
     "no_internet": "Please check your internet connection.",
     "server_500": "Something went wrong... Please try again.",
@@ -19,7 +19,7 @@
     "error_email_regex": "Please enter a valid email address.",
     "error_password_validation": "The password must be at least 8 characters.",
     "error_password_capital_letter": "The password must contain at least one capital letter.",
-    "error_password_special_character": "The password must contain at least one special character (@, #, $, etc.).",
+    "error_password_special_character": "The password must contain at least one special character (@, #, ?, !, etc.).",
     "error_wrong_password_confirm": "Passwords do not match.",
     "error_wrong_input": "Please enter a valid number.",
     "invalid_phone": "Invalid phone number.",

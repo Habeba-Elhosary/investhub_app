@@ -50,6 +50,10 @@ abstract class  LocaleKeys {
   static const auth_enter_national_id = 'auth.enter_national_id';
   static const auth_birth_date = 'auth.birth_date';
   static const auth_select_birth_date = 'auth.select_birth_date';
+  static const auth_phone = 'auth.phone';
+  static const auth_dont_have_account = 'auth.dont_have_account';
+  static const auth_signup = 'auth.signup';
+  static const auth_signin_with_google = 'auth.signin_with_google';
   static const auth_or = 'auth.or';
   static const auth_marital_status = 'auth.marital_status';
   static const auth_select_marital_status = 'auth.select_marital_status';
@@ -62,11 +66,8 @@ abstract class  LocaleKeys {
   static const auth_enter_total_savings = 'auth.enter_total_savings';
   static const auth_used_bank = 'auth.used_bank';
   static const auth_select_bank = 'auth.select_bank';
-  static const auth_create_account_hint = 'auth.create_account_hint';
-  static const auth_dont_have_account = 'auth.dont_have_account';
-  static const auth_signup = 'auth.signup';
-  static const auth_signin_with_google = 'auth.signin_with_google';
   static const auth_signin_welcome_message = 'auth.signin_welcome_message';
+  static const auth_create_account_hint = 'auth.create_account_hint';
   static const auth_signin_welcome_sub_message = 'auth.signin_welcome_sub_message';
   static const auth_create_password = 'auth.create_password';
   static const auth_enter_your_phone_number_to_reset_password = 'auth.enter_your_phone_number_to_reset_password';
@@ -79,10 +80,7 @@ abstract class  LocaleKeys {
   static const auth_signin = 'auth.signin';
   static const auth_no_account = 'auth.no_account';
   static const auth_create_new_account = 'auth.create_new_account';
-  static const auth_create_account_message = 'auth.create_account_message';
-  static const auth_create_account_sub_message = 'auth.create_account_sub_message';
   static const auth_user_name = 'auth.user_name';
-  static const auth_otp_sent_successfully = 'auth.otp_sent_successfully';
   static const auth_create_account = 'auth.create_account';
   static const auth_do_you_have_account = 'auth.do_you_have_account';
   static const auth_go_to_signin = 'auth.go_to_signin';
@@ -90,6 +88,7 @@ abstract class  LocaleKeys {
   static const auth_confirm_identity_message = 'auth.confirm_identity_message';
   static const auth_didnt_receive_code = 'auth.didnt_receive_code';
   static const auth_resend = 'auth.resend';
+  static const auth_otp_sent_successfully = 'auth.otp_sent_successfully';
   static const auth_password_changed_successfully = 'auth.password_changed_successfully';
   static const auth = 'auth';
   static const home_oppurtunities = 'home.oppurtunities';
@@ -121,10 +120,13 @@ abstract class  LocaleKeys {
   static const send = 'send';
   static const confirm = 'confirm';
   static const more = 'more';
-  static const pound = 'pound';
   static const yes = 'yes';
   static const no = 'no';
   static const retry = 'retry';
+  static const whats_up = 'whats_up';
+  static const call = 'call';
+  static const sms = 'sms';
+  static const copy = 'copy';
   static const the_previous = 'the_previous';
   static const the_next = 'the_next';
   static const subscribe_now = 'subscribe_now';
